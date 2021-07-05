@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(IdentityTypeSeed::class);
         $this->call(NationalitySeed::class);
-        $this->call(IdentityTypeSeed::class);
+        $this->call(TestTypeSeed::class);
 
     }
 }
