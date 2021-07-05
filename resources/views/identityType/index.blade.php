@@ -67,12 +67,12 @@
     var modal = document.getElementById('createModal');
     $(document).on("click", "#createModalOpen", function () {
         var action= document.getElementById('formIdentityType').action;
-        let url = action.split('identityType');
-        document.getElementById('formIdentityType').action=url[0];
+        let url = window.location.href.split('#')[0];
+        document.getElementById('formIdentityType').action=url;
 
         switch ($(this).data('action')) {
             case 'edit':
-                document.getElementById('formIdentityType').action=action+'identityType/'+$(this).data('id');
+                document.getElementById('formIdentityType').action=url+'/'+$(this).data('id');
                 document.getElementById('nameField').value=$(this).data('name');
                 document.getElementById('method').value='PUT';
                 document.getElementById('button').style.backgroundColor="#159EC8";

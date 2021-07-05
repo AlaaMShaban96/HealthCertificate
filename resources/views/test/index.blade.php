@@ -51,7 +51,7 @@
         <div class="modal-body">
                 <form id="formTest" action="{{url('/test')}}" method="post">
                 @csrf
-                <input id="method" type="hidden" name="_method" value="PUT">
+                <input id="method" type="hidden" name="_method" value="">
                 <div class="form-holder">
                     <div class="form-input-container">
                         <input type="text" name="name_ar" class="form-input" id="nameField" placeholder="اسم العربي">
@@ -85,18 +85,19 @@
 @endsection
 @section('script')
 <script>
+    console.log();
     var modal = document.getElementById('createModal');
     $(document).on("click", "#createModalOpen", function () {
         console.log($(this).data());
         var action= document.getElementById('formTest').action;
-        let url = action.split('test');
-        document.getElementById('formTest').action=url[0]+'test/';
+        let url = window.location.href.split('#')[0];
+        document.getElementById('formTest').action=url;
         document.getElementById('method').value='';
 
 
         switch ($(this).data('action')) {
             case 'edit':
-                document.getElementById('formTest').action=action+'/'+$(this).data('id');
+                document.getElementById('formTest').action=url+'/'+$(this).data('id');
                 document.getElementById('nameField').value=$(this).data('name_ar');
                 document.getElementById('nameField_en').value=$(this).data('name_en');
                 document.getElementById('method').value='PUT';
@@ -114,11 +115,12 @@
     });   
     $(document).on("click", "#unique", function () {
         let id=$(this).data('id');
+       
         let _token   = $('meta[name="csrf-token"]').attr('content');
         // console.log($(this).data(),selected);
 
       $.ajax({
-        url: "/test/"+id+"/unique",
+        url:  window.location.href.split('#')[0]+'/'+id+"/unique",
         type:"POST",
         data:{
             unique:1,
@@ -137,7 +139,7 @@
         console.log($(this).data(),selected);
 
       $.ajax({
-        url: "/test/"+id+"/selected",
+        url:  window.location.href.split('#')[0]+"/"+id+"/selected",
         type:"POST",
         data:{
           selected:selected,

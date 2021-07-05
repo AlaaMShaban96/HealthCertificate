@@ -21,8 +21,6 @@ use App\Http\Controllers\IdentityTypeController;
 */
 
 Route::get('/',[DashboardController::class,'index'])->name('dashboard');
-Route::get('/unique',[DashboardController::class,'unique'])->name('dashboard');
-Route::post('/unique',[DashboardController::class,'unique_store'])->name('dashboard');
 Route::get('/print/patient/{patient}/request/{request}',[DashboardController::class,'print']);
 Route::resource('nationality', NationalityController::class)->name('nationality','nationality');
 Route::resource('identityType', IdentityTypeController::class)->name('identityType','identityType');
@@ -31,5 +29,8 @@ Route::get('/request/{request}', [RequestController::class,'show'])->name('reque
 Route::post('/request/{patient}', [RequestController::class,'store'])->name('request');
 Route::resource('result', ResultController::class)->name('result','result');
 Route::resource('test', TestController::class)->name('test','test');
+
 Route::post('/test/{test}/selected', [TestController::class,'selected']);
 Route::post('/test/{test}/unique', [TestController::class,'unique']);
+Route::get('/unique',[DashboardController::class,'unique'])->name('dashboard');
+Route::post('/unique',[DashboardController::class,'unique_store'])->name('dashboard');

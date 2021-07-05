@@ -68,14 +68,14 @@
     $(document).on("click", "#createModalOpen", function () {
         console.log($(this).data());
         var action= document.getElementById('formNationality').action;
-        let url = action.split('nationality');
-        document.getElementById('formNationality').action=url[0]+'nationality/';
+        let url = window.location.href.split('#')[0]
+        document.getElementById('formNationality').action=url;
         document.getElementById('method').value='';
 
 
         switch ($(this).data('action')) {
             case 'edit':
-                document.getElementById('formNationality').action=action+'/'+$(this).data('id');
+                document.getElementById('formNationality').action= url+'/'+$(this).data('id');
                 document.getElementById('nameField').value=$(this).data('name');
                 document.getElementById('method').value='PUT';
                 document.getElementById('button').style.backgroundColor="#159EC8";
