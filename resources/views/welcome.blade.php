@@ -40,7 +40,7 @@
                 {{-- </a> --}}
                 <div class="avartar-picker">
                   <input type="file" name="file-1" id="file-1" class="inputfile" >
-                  <input type="file" name="photo" id="photo" class="inputfile" >
+                  <input type="text" name="photo" id="photo" class="inputfile" >
                   <label id="zmdi-camera" for="file-1" style="display:none;" >
                     <i  class="zmdi zmdi-camera"></i>
                     <span>تحميل صورة</span>
