@@ -27,7 +27,14 @@
                     @csrf
                     @method('DELETE')
                     <button class="delete" type="submit"><i class="fa fa-trash "></i></button>
-                    <a class="edit" id="createModalOpen" data-name_ar="{{$test->name_ar}}" data-name_en="{{$test->name_en}}" data-id="{{$test->id}}" data-action="edit" href="#"><i class="fa fa-pencil "></i></a>
+                    <a class="edit" id="createModalOpen" 
+                    data-name_ar="{{$test->name_ar}}"
+                     data-name_en="{{$test->name_en}}"
+                     data-positive="{{$test->positive}}"
+                     data-negative="{{$test->negative}}"
+                      data-id="{{$test->id}}"
+                       data-action="edit"
+                        href="#"><i class="fa fa-pencil "></i></a>
                     <input type="checkbox" class="selected" id="selected{{$test->id}}" data-id="{{$test->id}}" name="selected" value="{{$test->selected}}" {{$test->selected?'checked':''}}>
                 </form>
             </td>
@@ -64,18 +71,18 @@
                         <label for="nameField">اسم الانجليزي</label>
                     </div>
                 </div>
-              {{--    <div class="form-holder">
+                 <div class="form-holder">
                     <div class="form-input-container">
-                        <input type="text" name="positive" class="form-input" id="nameField" placeholder="النتيجة موجبة">
+                        <input type="text" name="positive" class="form-input" id="positive" placeholder="النتيجة موجبة">
                         <label for="nameField">النتيجة موجبة</label>
                     </div>
                 </div>
                <div class="form-holder">
                     <div class="form-input-container">
-                        <input type="text" name="negative" class="form-input" id="nameField" placeholder="النتيجة سالبة">
+                        <input type="text" name="negative" class="form-input" id="negative" placeholder="النتيجة سالبة">
                         <label for="nameField">النتيجة سالبة</label>
                     </div>
-                </div> --}}
+                </div>
                 <button id="button" type="submit" class="button button-wide modal-footer">اضافة</button>
             </form>
         </div>
@@ -100,11 +107,17 @@
                 document.getElementById('formTest').action=url+'/'+$(this).data('id');
                 document.getElementById('nameField').value=$(this).data('name_ar');
                 document.getElementById('nameField_en').value=$(this).data('name_en');
+                document.getElementById('positive').value=$(this).data('positive');
+                document.getElementById('negative').value=$(this).data('negative');
                 document.getElementById('method').value='PUT';
                 document.getElementById('button').style.backgroundColor="#159EC8";
 
                 break;
             case 'create':
+            document.getElementById('nameField').value="";
+                document.getElementById('nameField_en').value="";
+                document.getElementById('positive').value="";
+                document.getElementById('negative').value="";
                 document.getElementById('button').style.backgroundColor="#16D090";
                 break;
         

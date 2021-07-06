@@ -71,6 +71,10 @@
               <label>الاسم<label>
               <input required tabindex='1' name='name' type="text" placeholder="الاسم" class="form-control">
             </div>
+            <div class='input-style'>
+              <label>رقم الإصال<label>
+              <input required tabindex='1' name='request_number' type="number" placeholder="رقم الاصال في المنظومة" class="form-control">
+            </div>
                 <div style="display: flex;" >
                     <div style="width: 50%;">
                       

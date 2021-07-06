@@ -20,6 +20,8 @@ class TestController extends Controller
     }
     public function update(TestRequest $request , Test $test)
     {
+        !isset($request->positive)?$request['positive']="موجبة":'';
+        !isset($request->negative)?$request['negative']="خالي من فيروس ".$request->name_ar:'';
        $test->update($request->all());
        return redirect('test/');
     }
@@ -41,8 +43,8 @@ class TestController extends Controller
     }
     public function store(TestRequest $request)
     {
-        $request['positive']="موجبة";
-        $request['negative']="خالي من فيروس ".$request->name_ar;
+        !isset($request->positive)?$request['positive']="موجبة":'';
+        !isset($request->negative)?$request['negative']="خالي من فيروس ".$request->name_ar:'';
         Test::create($request->all());
         return redirect('test/');
 
