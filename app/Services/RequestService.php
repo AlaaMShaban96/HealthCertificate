@@ -77,14 +77,23 @@ class RequestService
     }
     public static function printResult(PatientRequest $patientRequest,Patient $patient,$covid19=false)
     {
-    
-        $testsCode=$patientRequest->results->map(function ($q)  {
-            return $q->test->name_en;
-        });
-        $testsCode= $testsCode->implode('-');
+        // if (!$covid19) {
+            $testsCode=$patientRequest->results->map(function ($q)  {
+                return $q->test->name_en;
+            });
+            $testsCode= $testsCode->implode('-');
+        // }
+        $x=!$covid19?$patientRequest->results()->latest()->first()->value:$testsCode;
         
         $tests=Test::all();
-        $qrCode= (DNS2D::getBarcodePNG(config('app.LAB_NAME')."\n".$patient->name."\n".$testsCode, 'QRCODE', 3, 3));
+        $qrCode= (DNS2D::getBarcodePNG(config('app.LAB_NAME').
+        "\n".'name='.$patient->name.
+        "\n".'nationality='.$patient->nationality->name.
+        "\n".'identity='.$patient->identityTypes()->where('request_id',$patientRequest->id)->first()->name.
+        "\n".'identity number='.$patient->identityTypes()->where('request_id',$patientRequest->id)->first()->pivot->identity.
+        "\n".'created at='.$patientRequest->created_at->format('Y-m-d').
+        "\n".$x, 
+        'QRCODE', 3, 3));
         $pdf = PDF::loadView('printables.print', ['patient' => $patient,'patientRequest'=> $patientRequest,'qr'=>$qrCode], [], ['format' => 'A4']);
         $fileName = str_replace('/', '-', random_int(0, 999999) . '_receipt.pdf');
         $path = public_path('/') . $fileName;
