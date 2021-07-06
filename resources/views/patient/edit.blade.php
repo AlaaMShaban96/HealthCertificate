@@ -96,7 +96,7 @@
                             
                             {{-- <div class='input-style'>
                               <label>نوع الهوية<label>
-                                <select name="identityType_id" id="" class="form-control">
+                                <select name="identity_type_id" id="" class="form-control">
                                   @foreach ($identityTypes as $identityType)
                                   <option  {{$patient->identityTypes()->first()->pivot->identity_type_id == $identityType->id ?'selected':''}} value="{{$identityType->id}}">{{$identityType->name}}</option>
                                   @endforeach

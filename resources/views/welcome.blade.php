@@ -106,7 +106,7 @@
                             
                             <div class='input-style'>
                               <label>نوع الهوية<label>
-                                <select required name="identityType_id" id="" class="form-control">
+                                <select required name="identity_type_id" id="" class="form-control">
                                   @foreach ($identityTypes as $identityType)
                                   <option value="{{$identityType->id}}">{{$identityType->name}}</option>
                                   @endforeach

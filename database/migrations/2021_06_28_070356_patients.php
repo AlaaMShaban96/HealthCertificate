@@ -18,7 +18,6 @@ class Patients extends Migration
             $table->string('name');
             $table->text('photo',255)->nullable();
             $table->string('gender',10);
-            $table->string('requesting_authority');
             $table->date('birth_date');
             $table->integer('age');
             $table->bigInteger('nationality_id')->unsigned();

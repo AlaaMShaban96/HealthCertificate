@@ -27,6 +27,7 @@ Route::resource('identityType', IdentityTypeController::class);
 Route::resource('patient', PatientController::class);
 Route::get('/request/{request}', [RequestController::class,'show']);
 Route::post('/request/{patient}', [RequestController::class,'store']);
+Route::post('/request/{patient}/update', [RequestController::class,'update']);
 Route::resource('result', ResultController::class);
 Route::resource('test', TestController::class);
 

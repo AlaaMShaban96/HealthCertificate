@@ -18,7 +18,10 @@ class PatientFilter extends ModelFilter
         return $this->where(function($q) use ($name)
         {
             return $q->where('name', 'LIKE', "%$name%")
-                ->orWhere('id', 'LIKE', "%$name%");
+                ->orWhere('id', 'LIKE', "%$name%")
+                ->orWhereHas('request', function ($q) use ($name) {
+                    $q->where('request_number',  'LIKE', "%$name%");
+                });
         });
     }
 }

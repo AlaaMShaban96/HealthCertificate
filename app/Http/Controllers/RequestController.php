@@ -17,10 +17,18 @@ class RequestController extends Controller
    }
   public function store(Request $request,Patient $patient)
    {
-     $patientRequest= RequestService::createRequest( $request,$patient);
+     $patientRequest= RequestService::createRequest( $request,$patient,false,'create');
    
-     return RequestService::printResult( $patientRequest,$patient);
-      // Session::flash('message', 'تمت الاضافة بنجاح');
-      // return  redirect()->back(); 
+   //   return RequestService::printResult( $patientRequest,$patient);
+      Session::flash('message', 'تمت الاضافة بنجاح');
+      return  redirect()->back(); 
+   }
+  public function update(Request $request,Patient $patient)
+   {
+     $patientRequest= RequestService::createRequest( $request,$patient,false,'update');
+   
+   //   return RequestService::printResult( $patientRequest,$patient);
+      Session::flash('message', 'تمت الحفظ بنجاح');
+      return  redirect()->back(); 
    }
 }

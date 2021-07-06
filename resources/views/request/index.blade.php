@@ -28,9 +28,12 @@
                 <td>
                     <a id="createModalOpen"  data-result="{{$patientRequest->results}}" href="#" >عرض نتيجة</a>
                 </td>
+                @if ($key==0)
                 <td>
                     <a target="_blank"  href="{{url("/print/patient/$request->id/request/$patientRequest->id")}}" >طباعة</a>
                 </td>
+                @endif
+                
             </tr>
         @endforeach
         @else
