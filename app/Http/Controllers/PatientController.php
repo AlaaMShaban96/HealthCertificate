@@ -27,41 +27,21 @@ class PatientController extends Controller
         $identityTypes=IdentityType::all();
         $nationalitys=Nationality::all();
         return view('patient.edit',compact('patient','identityTypes','nationalitys'));
-
-        # code...
     }
     public function store(Request $request)
     {
         $request['age']=Carbon::parse($request->birth_date)->age;
         $patient=Patient::create($request->all());
-       
-        $patientRequest=  RequestService::CreateRequest($request,$patient);
-        // $tests_is_negative=Test::all()->except($request->tests);
-        // $patientRequest= PatientRequest::create(['patient_id'=>$patient->id]);
-
-        // if (isset($request->tests)) {
-        //     foreach ($request->tests as  $test_id) {
-        //         Result::create([
-        //             'request_id'=>$patientRequest->id,
-        //             'test_id'=>$test_id,
-        //             'value'=>Test::find($test_id)->first()->positive,
-        //         ]);
-        //     }
-
-        // }
-                   
-        // foreach ($tests_is_negative as  $test) {
-        //     Result::create([
-        //         'request_id'=>$patientRequest->id,
-        //         'test_id'=>$test->id,
-        //         'value'=>$test->negative,
-        //     ]);
-        // }
-       
+        $patientRequest=  RequestService::CreateRequest($request,$patient);   
         Session::flash('message', 'تمت الإضافة بنجاح');
-
         return redirect('/');        
-        
+    }
+    public function update(Request $request,Patient $patient)
+    {
+        $patient->age=Carbon::parse($request->birth_date)->age;
+        $patient->update($request->all());
+        Session::flash('message', 'تمت التعديل بنجاح');
+        return redirect('/patient');        
     }
     public function destroy(Patient $patient)
     {

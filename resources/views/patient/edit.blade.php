@@ -26,9 +26,9 @@
 
 </div>
 
-    <form action="{{url('/patient')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{url("/patient/$patient->id")}}" method="POST" enctype="multipart/form-data">
       @csrf
-      @method('POST')
+      @method('PUT')
       <div id="wizard">
           <section>
 
@@ -36,12 +36,12 @@
               <div class="avartar">
                 <i  id="closeCamera" class="fa fa-times-circle fa-2x" aria-hidden="true" style="margin-left: 9%;visibility: hidden;"  onClick="closeCamera()"></i>
                 <div id='my_camera' >
-                  <img src="{{isset($patient->photo)?$patient->photo:'images/avartar.png'}}" alt="">
+                  <img src="{{$patient->photo!=null?$patient->photo:'images/avartar.png'}}" alt="">
 
                 </div>
                 <div class="avartar-picker">
                   <input type="file" name="file-1" id="file-1" class="inputfile" >
-                  <input type="text" name="photo" id="photo" class="inputfile" >
+                  <input type="text" name="photo" id="photo" value="{{$patient->photo}}" class="inputfile" >
                   <label id="zmdi-camera" for="file-1" style="display:none;" >
                     <i  class="zmdi zmdi-camera"></i>
                     <span>تحميل صورة</span>
@@ -51,15 +51,8 @@
 
                 </div>
                 <br>
-               
-               
-               {{-- <button type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;">طباعة</button> --}}
-    
-               
               </div>
-              
-
-                <div class="form-group ">
+                  <div class="form-group ">
                   <div class='input-style'>
                     <label>الاسم<label>
                     <input tabindex='1' name='name' type="text" placeholder="الاسم" class="form-control" value="{{$patient->name}}">
@@ -89,10 +82,10 @@
                                   @endforeach
                                 </select>
                             </div>
-                              <div class='input-style'>
+                              {{-- <div class='input-style'>
                                 <label>الجيهة<label>
                                 <input tabindex='4' name='requesting_authority' type="text" placeholder="الجيهة الطالبة لي الشهادة" class="form-control"value="{{$patient->requesting_authority}}">
-                              </div>
+                              </div> --}}
 
                           </div>
                         
@@ -101,18 +94,18 @@
                       <div style="display: flex;" >
                           <div style="width: 50%;">
                             
-                            <div class='input-style'>
+                            {{-- <div class='input-style'>
                               <label>نوع الهوية<label>
                                 <select name="identityType_id" id="" class="form-control">
                                   @foreach ($identityTypes as $identityType)
                                   <option  {{$patient->identityTypes()->first()->pivot->identity_type_id == $identityType->id ?'selected':''}} value="{{$identityType->id}}">{{$identityType->name}}</option>
                                   @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                      
 
                           </div>
-                          <div style="width: 50%;">
+                          {{-- <div style="width: 50%;">
                             <div class='input-style'>
                               <label>رقم الهوية<label>
                               <input tabindex='5' name='identityType_number' type="text" placeholder="رقم الهوية" class="form-control" value="{{$patient->identityTypes()->first()->pivot->identity}}">
@@ -120,7 +113,7 @@
                             
                               
 
-                          </div>
+                          </div> --}}
                         
                       </div>
                       <button type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;"> حفظ</button>
