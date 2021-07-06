@@ -20,18 +20,27 @@ class RequestService
     {
         
         $tests_is_negative=Test::where('selected',1)->get()->except($request->tests);
-        if ($action=='create') {
+        if ($action=='create'||$unique) {
             $patientRequest= PatientRequest::create(['patient_id'=>$patient->id,'request_number'=>$request->request_number,'requesting_authority'=>$request->requesting_authority]);
         }else {
             $patientRequest=$patient->request()->latest()->first();
         }
         if ($unique) {
             $test= Test::where('unique',1)->first();
-            Result::updateOrCreate([
+            if (isset($request->tests)) {
+                 Result::updateOrCreate([
                 'request_id'=>$patientRequest->id,
                 'test_id'=>$test->id],
                 ['value'=>$test->positive]
             );
+            }else {
+                 Result::updateOrCreate([
+                'request_id'=>$patientRequest->id,
+                'test_id'=>$test->id],
+                ['value'=>$test->negative]
+            );
+            }
+           
         }else {
             if (isset($request->tests)) {
                 foreach ($request->tests as  $test_id) {

@@ -32,9 +32,10 @@ class DashboardController extends Controller
     }
     public function unique_store(Request $request)
     {
+        // dd($request->all());
         $request['age']=Carbon::parse($request->birth_date)->age;
         $patient=Patient::create($request->all());
-        $patientRequest= RequestService::CreateRequest($request,$patient,Test::UNIQUE);
+        $patientRequest= RequestService::createRequest($request,$patient,Test::UNIQUE);
         return RequestService::printResult( $patientRequest,$patient,Test::UNIQUE);
 
     }

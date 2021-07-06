@@ -31,7 +31,7 @@
 {{-- <a id="createModalOpen" href="#" class="button">اضافة جنسية</a> --}}
 {{-- </div> --}}
 
-<form action="{{url('/unique')}}" method="POST" enctype="multipart/form-data">
+<form target="_blank" action="{{url('/unique')}}" method="POST" enctype="multipart/form-data">
 @csrf
 @method('POST')
 <div id="wizard">
@@ -114,9 +114,9 @@
                       
                       <div class='input-style'>
                         <label>نوع الهوية<label>
-                          <select required name="identity_type_id" id="" class="form-control">
+                          <select required name="identity_type_id" id="identity_type_id" class="form-control"  >
                             @foreach ($identityTypes as $identityType)
-                            <option value="{{$identityType->id}}">{{$identityType->name}}</option>
+                            <option  value="{{$identityType->id}}">{{$identityType->name}}</option>
                             @endforeach
                           </select>
                       </div>
@@ -157,8 +157,10 @@
                   
                 </table>
                 <br>
-                <button type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;"> حفظ</button>
-
+                <button  type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;"> حفظ</button>
+                <button  onClick="document.location.reload(true)"style="width: 33%;height: 38px;border-radius: 22px;background-color: #79f567;border: 0;color: white;margin-left: 4%;"> جديد</button>
+                {{-- <button type="submit"> حفظ</button> --}}
+                {{-- <a href="#" type="submit" style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;" target="_blank"><a> --}}
                 
        </div>
        
