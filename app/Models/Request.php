@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Request extends Model
 {
     protected $table='requests';
-    protected $fillable = ['patient_id'];
+    protected $fillable = ['patient_id','request_number'];
     use HasFactory;
     /**
      * Get the patient that owns the Request

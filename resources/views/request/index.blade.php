@@ -13,6 +13,7 @@
     <thead>
         <td>#</td>
         <td>تاريخ الاصدار</td>
+        <td>رقم الإصال</td>
         <td></td>
         <td></td>
        
@@ -23,6 +24,7 @@
             <tr>
                 <td>{{$key }}</td>
                 <td>{{$patientRequest->created_at->format('h:m / Y-m-d ') }}</td>
+                <td>{{$patientRequest->request_number }}</td>
                 <td>
                     <a id="createModalOpen"  data-result="{{$patientRequest->results}}" href="#" >عرض نتيجة</a>
                 </td>
