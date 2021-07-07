@@ -32,7 +32,7 @@ textarea {
 input, textarea, select, button {
   font-family: "Poppins-Regular";
   font-size: 13px;
-  color: #333; }
+  color: #000; }
 
 p, h1, h2, h3, h4, h5, h6, ul {
   margin: 0; }
@@ -174,11 +174,12 @@ body {
 .form-control {
   height: 46px;
   border: none;
-  background: #f7f7f7;
+  background: #69bbbc6e;
   width: 100%;
   padding: 0 25px;
   border-radius: 23px;
-  color: #333; }
+  color: #333; 
+  font-size: 18px;}
   .form-control::-webkit-input-placeholder {
     color: #808080;
     text-transform: uppercase; }
