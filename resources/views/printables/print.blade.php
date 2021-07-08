@@ -188,6 +188,27 @@
             /* background-color: red ; */
 
         }
+        .td1-result{
+            width: 30%; 
+            background-color: :rgb(251, 249, 249) ;
+
+            /* background-color: red ; */
+
+        }
+        .t2d2-result{
+            width: 50%;
+            background-color:rgb(251, 249, 249) ;
+           
+             /* background-color:rgb(47, 0, 255) ; */
+             /* font-size: 22px;  */
+            /* background-color: rgb(240, 145, 128) ; */
+
+        }
+        .td3-result{
+            width: 20%; 
+            background-color: :rgb(251, 249, 249) ;
+
+        }
         .td2{
             width: 50%;
              /* background-color:rgb(227, 227, 228) ; */
@@ -210,6 +231,7 @@
             /* background-color: rgb(240, 145, 128) ; */
 
         }
+       
         .bold{
             font-weight: bold;
         }
@@ -218,6 +240,7 @@
             background-color: rgb(248, 198, 190) ;
 
         }
+        
         .img-border{
             width:250px;
             height:200px;
@@ -343,9 +366,9 @@
         <br>
         <table >
             <tr>
-                <td class="td td1">Test </td>
-                <td class="td t2d2">Result / النتيجة</td>
-                <td class="td td3">الاختبار</td>
+                <td class="td td1-result">Test </td>
+                <td class="td t2d2-result">Result / النتيجة</td>
+                <td class="td td3-result">الاختبار</td>
             </tr>
             @foreach ($patientRequest->results as $result)
             <tr>
