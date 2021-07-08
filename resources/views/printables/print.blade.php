@@ -324,7 +324,7 @@
             </tr>
             <tr>
                 <td class="td td1">Requesting authority</td>
-                <td class="td t2d2 bold">{{$patient->requesting_authority}}</td>
+                <td class="td t2d2 bold">{{$patientRequest->requesting_authority}}</td>
                 <td class="td td3">الجهة</td>
             </tr>
             <tr>
