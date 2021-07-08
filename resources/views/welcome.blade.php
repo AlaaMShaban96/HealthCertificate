@@ -46,7 +46,7 @@
                     <span>تحميل صورة</span>
                   </label>
                   <button id="take_snapshot" type="button"onClick="take_snap()" style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;display: none;"> التقاط</button>
-                  <button id="open_camera" type="button"onClick="openCamera()"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;display: inline;"> الكاميرة</button>
+                  <button id="open_camera" type="button"onClick="openCamera()"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;display: inline;"> الكاميرا</button>
 
                 </div>
                 <br>
@@ -65,7 +65,7 @@
                   </div>
                   <div class='input-style'>
                     <label>رقم الإصال<label>
-                    <input required tabindex='1' name='request_number' type="number" placeholder="رقم الاصال في المنظومة" class="form-control">
+                    <input  tabindex='1' name='request_number' type="number" placeholder="رقم الاصال في المنظومة" class="form-control">
                   </div>
                       <div style="display: flex;" >
                           <div style="width: 50%;">

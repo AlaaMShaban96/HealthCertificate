@@ -24,4 +24,14 @@ class PatientFilter extends ModelFilter
                 });
         });
     }
+    public function date($date)
+    {
+        // dd($date);
+        return $this->where(function($q) use ($date)
+        {
+            return $q->WhereHas('request', function ($q) use ($date) {
+                    $q->whereBetween('created_at',  [$date['start'],$date['end']]);
+                });
+        });
+    }
 }

@@ -6,12 +6,22 @@
 @section('content')
 <div class="nav">
     <div><h2>الحالات</h2>
+
         <form action="{{url('patient')}}" method="GET">
             <input class="search" name="name" placeholder="البحث" />
+
+            <label for="start">من:</label>
+            <input type="date"  class="search"  id="start" placeholder="dd-mm-yyyy"     name="date[start]" >
+            <label for="start">الي:</label>
+            <input type="date"  class="search"  id="end" placeholder="dd-mm-yyyy"    name="date[end]" >
+            <button  type="submit"  class="button">بحث</button>
+
         </form>
+    {{-- </div>
+    <div> --}}
+
     </div>
   
-    {{-- <a id="createModalOpen" href="#" class="button">اضافة جنسية</a> --}}
 </div>
 <table>
     <thead>
@@ -190,7 +200,21 @@
 
 
     });
-   
+  
+    // <script >
+            // function filldate(){
+                // var d=Date.now() // date received from card
+    // document.getElementById('cardexpirydate1').value=d.split('/').reverse().join("-");
+    // document.getElementById('cardexpirydate2').value=d.split('/').reverse().join("-");
+
+
+//     var d=new Date().toJSON().slice(0,10).replace(/-/g,'/');// date received from card
+// console.log(d);
+            // function filldate(){
+    // document.getElementById('cardexpirydate1').value=d;
+    // document.getElementById('cardexpirydate2').value=d;
+    // }
+        // </script>
 </script>
 
 @endsection

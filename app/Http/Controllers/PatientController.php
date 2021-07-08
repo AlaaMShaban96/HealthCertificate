@@ -17,6 +17,7 @@ class PatientController extends Controller
 {
     public function index(Request $request)
     {
+        // dd($request->all());
         $identityTypes=IdentityType::all();
         $tests=Test::where('selected',1)->get();
        $patients= Patient::filter($request->all())->paginateFilter(10);
