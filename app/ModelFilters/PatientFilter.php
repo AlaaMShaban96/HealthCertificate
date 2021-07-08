@@ -26,11 +26,13 @@ class PatientFilter extends ModelFilter
     }
     public function date($date)
     {
-        // dd($date);
-        return $this->where(function($q) use ($date)
+        $start =  now()->setDateFrom($date['start'])->startOfDay() ;
+        $end = now()->setDateFrom($date['end'])->endOfDay();
+
+        return $this->where(function($q) use ($start,$end)
         {
-            return $q->WhereHas('request', function ($q) use ($date) {
-                    $q->whereBetween('created_at',  [$date['start'],$date['end']]);
+            return $q->WhereHas('request', function ($q) use ($start,$end) {
+                    $q->whereBetween('created_at',  [$start,$end]);
                 });
         });
     }
