@@ -35,6 +35,11 @@ class Patient extends Model
         $identity =$this->identityTypes()->latest()->first()->pivot->identity;
         return isset($identity)?$identity:0;
     }
+    public function get_identity_type_id()
+    {
+        $identity =$this->identityTypes()->latest()->first()->pivot->identity_type_id;
+        return isset($identity)?$identity:0;
+    }
     /**
      * Get all of the request for the Patient
      *

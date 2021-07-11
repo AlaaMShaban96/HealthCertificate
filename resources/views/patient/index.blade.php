@@ -50,7 +50,7 @@
                     <a class="edit" id="createModalOpen" 
                     data-id="{{$patient->id}}" 
                     data-identityType_number="{{$patient->identity}}" 
-                    data-identity_type_id="{{$patient->identityTypes()->where('request_id',$patient->request()->latest()->first()->id)->first()->pivot->identity_type_id}}" 
+                    data-identity_type_id="{{$patient->identity_type_id}}" 
                     data-requesting_authority="{{$patient->request()->latest()->first()->requesting_authority}}" 
                     data-request_number="{{$patient->request()->latest()->first()->request_number}}" 
                     href="#"
