@@ -30,6 +30,11 @@ class Patient extends Model
     {
         return $this->belongsToMany(IdentityType::class, 'identity_types_patient')->withPivot('identity','request_id');
     }
+    public function get_identity()
+    {
+        $identity =$this->identityTypes()->latest()->first()->pivot->identity;
+        return isset($identity)?$identity:0;
+    }
     /**
      * Get all of the request for the Patient
      *
