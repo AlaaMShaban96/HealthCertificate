@@ -20,7 +20,7 @@ class PatientController extends Controller
         // dd($request->all());
         $identityTypes=IdentityType::all();
         $tests=Test::where('selected',1)->get();
-       $patients= Patient::filter($request->all())->paginateFilter(10);
+       $patients= Patient::filter($request->all())->orderBy('id', 'DESC')->paginateFilter(10);
        return view('patient.index',compact('patients','identityTypes','tests'));
     }
     public function show(Patient $patient)
