@@ -51,8 +51,8 @@
                     data-id="{{$patient->id}}" 
                     data-identityType_number="{{$patient->identity}}" 
                     data-identity_type_id="{{$patient->identity_type_id}}" 
-                    data-requesting_authority="{{$patient->request()->latest()->first()->requesting_authority}}" 
-                    data-request_number="{{$patient->request()->latest()->first()->request_number}}" 
+                    data-requesting_authority="{{$patient->requesting_authority}}" 
+                    data-request_number="{{$patient->request_number}}" 
                     href="#"
                     
                     >

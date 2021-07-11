@@ -10,6 +10,7 @@ class Patient extends Model
 {
     use Filterable;
     protected $table='patients';
+    protected $appends = ['identity','IdentityTypeId','RequestingAuthority','RequestNumber'];
     protected $fillable = ['name','photo','gender','birth_date','age','nationality_id'];
     use HasFactory;
     /**
@@ -30,15 +31,25 @@ class Patient extends Model
     {
         return $this->belongsToMany(IdentityType::class, 'identity_types_patient')->withPivot('identity','request_id');
     }
-    public function get_identity()
+    public function getIdentityAttribute()
     {
         $identity =$this->identityTypes()->latest()->first()->pivot->identity;
         return isset($identity)?$identity:0;
     }
-    public function get_identity_type_id()
+    public function getIdentityTypeIdAttribute()
     {
         $identity =$this->identityTypes()->latest()->first()->pivot->identity_type_id;
         return isset($identity)?$identity:0;
+    }
+    public function getRequestingAuthorityAttribute()
+    {
+        $requesting_authority =$this->request()->latest()->first()->requesting_authority;
+        return isset($requesting_authority)?$requesting_authority:'لا يوجد';
+    }
+    public function getRequestNumberAttribute()
+    {
+        $request_number =$this->request()->latest()->first()->request_number;
+        return isset($request_number)?$request_number:'';
     }
     /**
      * Get all of the request for the Patient
