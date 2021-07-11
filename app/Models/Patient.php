@@ -43,13 +43,13 @@ class Patient extends Model
     }
     public function getRequestingAuthorityAttribute()
     {
-        $requesting_authority =$this->request()->latest()->first()->requesting_authority;
-        return isset($requesting_authority)?$requesting_authority:'لا يوجد';
+        $requesting_authority =$this->request()->latest()->first();
+        return isset($requesting_authority)?$requesting_authority->requesting_authority:'لا يوجد';
     }
     public function getRequestNumberAttribute()
     {
-        $request_number =$this->request()->latest()->first()->request_number;
-        return isset($request_number)?$request_number:'';
+        $request_number =$this->request()->latest()->first();
+        return isset($request_number)?$request_number->request_number:'';
     }
     /**
      * Get all of the request for the Patient
