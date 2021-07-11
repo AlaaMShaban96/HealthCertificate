@@ -33,13 +33,13 @@ class Patient extends Model
     }
     public function getIdentityAttribute()
     {
-        $identity =$this->identityTypes()->latest()->first()->pivot->identity;
-        return isset($identity)?$identity:0;
+        $identity =$this->identityTypes()->latest()->first();
+        return isset($identity)?$identity->pivot->identity:0;
     }
     public function getIdentityTypeIdAttribute()
     {
-        $identity =$this->identityTypes()->latest()->first()->pivot->identity_type_id;
-        return isset($identity)?$identity:0;
+        $identity =$this->identityTypes()->latest()->first();
+        return isset($identity)?$identity->pivot->identity_type_id:0;
     }
     public function getRequestingAuthorityAttribute()
     {
