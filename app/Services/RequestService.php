@@ -71,6 +71,17 @@ class RequestService
                 'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             ]);
+        }else {
+            // dd( $patient->identityTypes());
+            // $patient->identityTypes()->detach($request->identity_type_id);
+            $patient->identityTypes()->sync(1,
+            [
+                'identity_type_id'=>$request->identity_type_id,
+                'request_id'=>$patientRequest->id,
+                'identity'=>$request->identityType_number,
+                'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
+            ]);
         }
      
         return $patientRequest;

@@ -8,5 +8,6 @@
         <a href="{{url('/patient')}}" class="item {{ (\Request::route()->getName() == 'ratings') ? 'active' : '' }}"><i class="fa fa-star"></i>الحالات </a>
         <a href="{{url('/test')}}" class="item {{ (\Request::route()->getName() == 'notes') ? 'active' : '' }}"><i class="fa fa-sticky-note-o"></i>التحاليل </a>
         <a href="{{url('/unique')}}" class="item {{ (\Request::route()->getName() == 'notes') ? 'active' : '' }}"><i class="fa fa-bug" aria-hidden="true"></i>تحليل منفرد </a>
+        <a href="{{url('/remove')}}" class="item {{ (\Request::route()->getName() == 'remove') ? 'active' : '' }}"><i class="fa fa-trash "></i>حذف السجلات </a>
     </div>
 </section>

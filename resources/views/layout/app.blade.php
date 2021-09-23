@@ -29,10 +29,10 @@
                 <div>
                     @if ($errors->any())
                     @foreach ($errors->all() as $error)
-                        <div class="alert alert-error">
+                        <label class=" alert-error">
                             {{  $error}}
                             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        </div>
+                        </label>
                     @endforeach
                 @endif
                 @if(Session::has('message'))

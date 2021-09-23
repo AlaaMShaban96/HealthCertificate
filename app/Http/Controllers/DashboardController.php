@@ -10,7 +10,9 @@ use App\Models\Nationality;
 use App\Models\IdentityType;
 use Illuminate\Http\Request;
 use App\Services\RequestService;
+use App\Http\Requests\DeleteRequest;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use App\Models\Request as PatientRequest;
 
@@ -42,5 +44,21 @@ class DashboardController extends Controller
     public function print(Patient $patient,PatientRequest $request)
     {
       return  RequestService::printResult($request,$patient);
+    }
+    public function showRemovePage(Request $request)
+    {
+       $patients= Patient::filter($request->all())->orderBy('id', 'DESC')->paginateFilter(10);
+       return view('remove.index',compact('patients'));
+    }
+    public function remove(DeleteRequest $request)
+    {
+        if(isset($request->date['start'])) $start =  now()->setDateFrom($request->date['start'])->startOfDay() ;
+       if(isset($request->date['end'])) $end = now()->setDateFrom($request->date['end'])->endOfDay();
+        if (isset($start) &&$end ) {
+            Patient::whereBetween('created_at',  [$start,$end])->delete();
+            Session::flash('message', 'تمت حدف البيانات بنجاح');
+
+            return redirect()->back();
+        }
     }
 }

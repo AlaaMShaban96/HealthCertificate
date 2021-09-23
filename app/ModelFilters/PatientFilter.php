@@ -15,25 +15,28 @@ class PatientFilter extends ModelFilter
     public $relations = [];
     public function name($name)
     {
-        return $this->where(function($q) use ($name)
-        {
-            return $q->where('name', 'LIKE', "%$name%")
+        // return $this->where(function($q) use ($name)
+        // {
+            return $this->where('name', 'LIKE', "%$name%")
                 ->orWhere('id', 'LIKE', "%$name%")
-                ->orWhereHas('request', function ($q) use ($name) {
-                    $q->where('request_number',  'LIKE', "%$name%");
+                ->orWhereHas('request', function ($request) use ($name) {
+                    $request->where('request_number','LIKE', "%$name%");
                 });
-        });
+        // });
     }
     public function date($date)
     {
-        $start =  now()->setDateFrom($date['start'])->startOfDay() ;
-        $end = now()->setDateFrom($date['end'])->endOfDay();
-
-        return $this->where(function($q) use ($start,$end)
-        {
-            return $q->WhereHas('request', function ($q) use ($start,$end) {
-                    $q->whereBetween('created_at',  [$start,$end]);
-                });
-        });
+       
+       if(isset($date['start'])) $start =  now()->setDateFrom($date['start'])->startOfDay() ;
+       if(isset($date['end'])) $end = now()->setDateFrom($date['end'])->endOfDay();
+        if (isset($start) &&$end ) {
+            return $this->where(function($q) use ($start,$end)
+            {
+                return $q->WhereHas('request', function ($q) use ($start,$end) {
+                        $q->whereBetween('created_at',  [$start,$end]);
+                    });
+            });
+        }
+       
     }
 }

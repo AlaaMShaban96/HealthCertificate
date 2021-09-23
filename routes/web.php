@@ -35,7 +35,10 @@ Route::post('/test/{test}/selected', [TestController::class,'selected']);
 Route::post('/test/{test}/unique', [TestController::class,'unique']);
 Route::get('/unique',[DashboardController::class,'unique']);
 Route::post('/unique',[DashboardController::class,'unique_store']);
-Route::get('test', function () {
-    $patient=App\Models\Patient::find(10);
-    return $patient->identity;
-});
+Route::get('/remove',[DashboardController::class,'showRemovePage']);
+Route::delete('/remove',[DashboardController::class,'remove']);
+// Route::post('/remove',[DashboardController::class,'unique_store']);
+// Route::get('test', function () {
+//     $patient=App\Models\Patient::find(10);
+//     return $patient->identity;
+// });
