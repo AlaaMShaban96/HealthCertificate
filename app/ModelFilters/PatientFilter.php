@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\ModelFilters;
 
@@ -18,15 +18,19 @@ class PatientFilter extends ModelFilter
         // return $this->where(function($q) use ($name)
         // {
             return $this->where('name', 'LIKE', "%$name%")
-                ->orWhere('id', 'LIKE', "%$name%")
-                ->orWhereHas('request', function ($request) use ($name) {
-                    $request->where('request_number','LIKE', "%$name%");
-                });
+                ->orWhere('id', 'LIKE', "%$name%");
         // });
+    }
+    public function requestNumber($request_number)
+    {
+
+        return $this->WhereHas('request', function ($request) use ($request_number) {
+                $request->where('request_number','LIKE', "%$request_number%");
+            });
     }
     public function date($date)
     {
-       
+
        if(isset($date['start'])) $start =  now()->setDateFrom($date['start'])->startOfDay() ;
        if(isset($date['end'])) $end = now()->setDateFrom($date['end'])->endOfDay();
         if (isset($start) &&$end ) {
@@ -37,6 +41,6 @@ class PatientFilter extends ModelFilter
                     });
             });
         }
-       
+
     }
 }

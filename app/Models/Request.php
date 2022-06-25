@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Request extends Model
 {
     protected $table='requests';
-    protected $fillable = ['patient_id','request_number','requesting_authority'];
+    protected $fillable = ['patient_id','request_number','requesting_authority','unique'];
     use HasFactory;
     /**
      * Get the patient that owns the Request
@@ -29,6 +29,6 @@ class Request extends Model
     {
         return $this->hasMany(Result::class);
     }
-   
-    
+
+
 }

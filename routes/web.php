@@ -20,25 +20,24 @@ use App\Http\Controllers\IdentityTypeController;
 |
 */
 
-Route::get('/',[DashboardController::class,'index']);
+Route::get('/',[DashboardController::class,'index'])->name('index');
 Route::get('/print/patient/{patient}/request/{request}',[DashboardController::class,'print']);
 Route::resource('nationality', NationalityController::class);
 Route::resource('identityType', IdentityTypeController::class);
-Route::resource('patient', PatientController::class);
+Route::resource('patient', PatientController::class,['names' => 'patient']);
 Route::get('/request/{request}', [RequestController::class,'show']);
 Route::post('/request/{patient}', [RequestController::class,'store']);
-Route::post('/request/{patient}/update', [RequestController::class,'update']);
+Route::put('/request/{patient}/update', [RequestController::class,'update']);
 Route::resource('result', ResultController::class);
 Route::resource('test', TestController::class);
 
 Route::post('/test/{test}/selected', [TestController::class,'selected']);
 Route::post('/test/{test}/unique', [TestController::class,'unique']);
-Route::get('/unique',[DashboardController::class,'unique']);
+Route::get('/unique',[DashboardController::class,'unique'])->name('unique');;
 Route::post('/unique',[DashboardController::class,'unique_store']);
-Route::get('/remove',[DashboardController::class,'showRemovePage']);
+Route::get('/remove',[DashboardController::class,'showRemovePage'])->name('remove');
 Route::delete('/remove',[DashboardController::class,'remove']);
 // Route::post('/remove',[DashboardController::class,'unique_store']);
 // Route::get('test', function () {
-//     $patient=App\Models\Patient::find(10);
-//     return $patient->identity;
+//     return view("new.patient.index");
 // });

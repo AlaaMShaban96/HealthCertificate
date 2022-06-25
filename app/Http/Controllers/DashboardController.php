@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use PDF; 
+use PDF;
 use Carbon\Carbon;
 use App\Models\Test;
 use App\Models\Patient;
@@ -19,23 +19,24 @@ use App\Models\Request as PatientRequest;
 class DashboardController extends Controller
 {
     public function index()
-    {   
+    {
         $tests=Test::where('selected',1)->get();
         $identityTypes=IdentityType::all();
         $nationalitys=Nationality::all();
-        return view('welcome',compact('tests','identityTypes','nationalitys'));
+        return view('new.index',compact('tests','identityTypes','nationalitys'));
     }
     public function unique()
-    {   
+    {
         $test= Test::where('unique',1)->first();
         $identityTypes=IdentityType::all();
         $nationalitys=Nationality::all();
-        return view('unique.index',compact('test','identityTypes','nationalitys'));
+        return view('new.unique.index',compact('test','identityTypes','nationalitys'));
     }
     public function unique_store(Request $request)
     {
         // dd($request->all());
         $request['age']=Carbon::parse($request->birth_date)->age;
+        $request['unique']=1;
         $patient=Patient::create($request->all());
         $patientRequest= RequestService::createRequest($request,$patient,Test::UNIQUE);
         return RequestService::printResult( $patientRequest,$patient,Test::UNIQUE);
@@ -48,7 +49,7 @@ class DashboardController extends Controller
     public function showRemovePage(Request $request)
     {
        $patients= Patient::filter($request->all())->orderBy('id', 'DESC')->paginateFilter(10);
-       return view('remove.index',compact('patients'));
+       return view('new.remove.index',compact('patients'));
     }
     public function remove(DeleteRequest $request)
     {

@@ -21,7 +21,7 @@
     <div> --}}
 
     </div>
-  
+
 </div>
 <table>
     <thead>
@@ -47,14 +47,14 @@
                     @csrf
                     @method('DELETE')
                     <a class="edit" href="{{url('/patient/'.$patient->id)}}"><i class="fa fa-pencil fa-2x"></i></a>
-                    <a class="edit" id="createModalOpen" 
-                    data-id="{{$patient->id}}" 
-                    data-identityType_number="{{$patient->identity}}" 
-                    data-identity_type_id="{{$patient->identity_type_id}}" 
-                    data-requesting_authority="{{$patient->requesting_authority}}" 
-                    data-request_number="{{$patient->request_number}}" 
+                    <a class="edit" id="createModalOpen"
+                    data-id="{{$patient->id}}"
+                    data-identityType_number="{{$patient->identity}}"
+                    data-identity_type_id="{{$patient->identity_type_id}}"
+                    data-requesting_authority="{{$patient->requesting_authority}}"
+                    data-request_number="{{$patient->request_number}}"
                     href="#"
-                    
+
                     >
                     <i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
 
@@ -89,8 +89,8 @@
         <div class="modal-header">
             <h2>اصدار شهادة</h2>
             {{-- <button type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;"> طباعة</button> --}}
-            
-          
+
+
             {{-- <span ><i class="fa fa-file-text" aria-hidden="true"></i></span> --}}
             <span class="close">&times;</span>
         </div>
@@ -137,29 +137,29 @@
                               <td>
                                  <label class="switch">
                                     <input id="checkboxinp" type="checkbox" name="tests[]" value="{{$test->id}}">
-                                    <div class="slider round"></div>     
+                                    <div class="slider round"></div>
                                 </label>
                               </td>
                               <td>
                                 {{$test->name_en}}
                               </td>
-                            
+
                             </tr>
                             @endforeach
-                            
+
                           </table>
-                         
+
                     </div>
-                   
+
                 </div>
                 <div style="text-align: end;">
                     <a class="edit" href="#" id="newRequest">
                         جديد
                         <i class="fa fa-file-text fa-2x" aria-hidden="true"></i>
-        
+
                     </a>
                 </div>
-                
+
             </form>
         </div>
     </div>
@@ -185,7 +185,7 @@
         modal.style.display = 'block';
 
     });
-    $(document).on("click", "#newRequest", function () { 
+    $(document).on("click", "#newRequest", function () {
         let action= document.getElementById('formCreateRequest').action;
         let url=action.split('/update')[0];
         console.log(url);
@@ -200,7 +200,7 @@
 
 
     });
-  
+
     // <script >
             // function filldate(){
                 // var d=Date.now() // date received from card
@@ -214,7 +214,8 @@
     // document.getElementById('cardexpirydate1').value=d;
     // document.getElementById('cardexpirydate2').value=d;
     // }
-        // </script>
+        //
 </script>
+
 
 @endsection

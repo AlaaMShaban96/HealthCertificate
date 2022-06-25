@@ -147,7 +147,7 @@
             background-color: #fff6f6 !important;
         }
 
-       
+
 
         .table-title {
             font-size: 20px !important;
@@ -182,14 +182,14 @@
 
         }
         .td1{
-            width: 30%; 
+            width: 30%;
             background-color: rgb(248, 198, 190) ;
 
             /* background-color: red ; */
 
         }
         .td1-result{
-            width: 30%; 
+            width: 30%;
             background-color: :rgb(251, 249, 249) ;
 
             /* background-color: red ; */
@@ -198,14 +198,14 @@
         .t2d2-result{
             width: 50%;
             background-color:rgb(251, 249, 249) ;
-           
+
              /* background-color:rgb(47, 0, 255) ; */
              /* font-size: 22px;  */
             /* background-color: rgb(240, 145, 128) ; */
 
         }
         .td3-result{
-            width: 20%; 
+            width: 20%;
             background-color: :rgb(251, 249, 249) ;
 
         }
@@ -214,9 +214,9 @@
              /* background-color:rgb(227, 227, 228) ; */
              font-size: 33px;
         }
-        
+
         .td1-IMG{
-            width: 30%; 
+            width: 30%;
             background-color:rgb(227, 227, 228) ;
 
              /* background-color:rgb(47, 0, 255) ; */
@@ -225,22 +225,22 @@
         .t2d2{
             width: 50%;
             background-color:rgb(227, 227, 228) ;
-           
+
              /* background-color:rgb(47, 0, 255) ; */
              /* font-size: 22px;  */
             /* background-color: rgb(240, 145, 128) ; */
 
         }
-       
+
         .bold{
             font-weight: bold;
         }
         .td3{
-            width: 20%; 
+            width: 20%;
             background-color: rgb(248, 198, 190) ;
 
         }
-        
+
         .img-border{
             width:250px;
             height:200px;
@@ -251,7 +251,7 @@
 </head>
 
 <body>
-  
+
 
 <htmlpageheader name="page-header">
     <br>
@@ -260,13 +260,13 @@
     <br>
     <br>
     <br>
-    
-  
+
+
     <div class="full-width">
         <table >
           <tr>
               <td class="td td1-IMG" rowspan="9" >
-                    <img width="25%" height='150px' src='{{ $patient->photo }}'alt=""/>
+                    <img width="25%" height='150px' src='{{ $patient->photo??null }}'alt=""/>
               </td>
               <td class="td td2" rowspan="2">
                   الشهادة الصحية
@@ -303,17 +303,17 @@
           <tr>
               <td class="td td2-IMG"></td>
           </tr>
-       
-       
+
+
         </table>
         </htmlpageheader>
         <br>
         <br>
         <br>
         <br>
-    
 
-      
+
+
         <table >
             <tr>
                 <td class="td td1">Date</td>
@@ -360,8 +360,8 @@
                 <td class="td t2d2 bold">{{$patient->identityTypes()->where('request_id',$patientRequest->id)->first()->pivot->identity}}</td>
                 <td class="td td3">رقم  المستند</td>
             </tr>
-        
-        
+
+
         </table>
         <br>
         <table >
@@ -377,13 +377,13 @@
                 <td class="td td3">{{$result->test->name_ar}}</td>
             </tr>
             @endforeach
-            
+
         </table>
         <br>
         <br>
-      
-       
-      
+
+
+
 
         <table >
             <tr>
@@ -391,18 +391,18 @@
                     <h3>Signature</h3>
                     <br>
                     <br>
-                ....................................................    
+                ....................................................
                 </td>
                 <td style=" width: 50%; ">
-                    
+
                 </td>
                 <td style=" width: 20%; ">
                     <h3>Print</h3>
                     <br>
                     <br>
-                ....................................................  
+                ....................................................
                 </td>
-            </tr>            
+            </tr>
         </table>
     </div>
 
