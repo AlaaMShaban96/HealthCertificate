@@ -1,4 +1,4 @@
-<aside id="layout-menu" style="left: 80%;" class="layout-menu menu-vertical menu bg-menu-theme">
+<aside id="layout-menu" style="left: 86%;" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
       <a href="index.html" class="app-brand-link">
         <span class="app-brand-logo demo">
