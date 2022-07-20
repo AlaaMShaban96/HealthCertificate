@@ -45,9 +45,14 @@ class PatientController extends Controller
         $patient->age=Carbon::parse($request->birth_date)->age;
            //if request have file store it
         if($request->hasFile('image')){
-            $request->merge(['photo'=>Storage::url($request->image->store('public/images'))]);
+            // convert image to base64
+            $image = $request->file('image');
+            $image_base64 ="data:image/jpeg;base64,". base64_encode(file_get_contents($image->getRealPath()));
+            $request->merge(['photo'=>$image_base64]);
         }
-
+        else {
+            $request['photo']=$patient->photo;
+        }
         $patient->update($request->all());
         Session::flash('message', 'تمت التعديل بنجاح');
         return redirect('/patient');
