@@ -13,12 +13,12 @@ use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use Milon\Barcode\Facades\DNS2DFacade as DNS2D;
 use Illuminate\Support\Facades\Response as FacadeResponse;
 
-class RequestService 
+class RequestService
 {
-   
+
     public static function createRequest(Request $request,Patient $patient,$unique=false,$action='create')
     {
-        
+
         $tests_is_negative=Test::where('selected',1)->get()->except($request->tests);
         if ($action=='create'||$unique) {
             $patientRequest= PatientRequest::create(['patient_id'=>$patient->id,'request_number'=>$request->request_number,'requesting_authority'=>$request->requesting_authority]);
@@ -40,7 +40,7 @@ class RequestService
                 ['value'=>$test->negative]
             );
             }
-           
+
         }else {
             if (isset($request->tests)) {
                 foreach ($request->tests as  $test_id) {
@@ -60,7 +60,7 @@ class RequestService
                 );
             }
         }
-            
+
         if ($action=='create') {
 
             $patient->identityTypes()->attach(1,
@@ -83,39 +83,41 @@ class RequestService
                 'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             ]);
         }
-     
+
         return $patientRequest;
     }
-    public static function printResult(PatientRequest $patientRequest,Patient $patient,$covid19=false)
-    {
+
+    public static function printResult(PatientRequest $patientRequest, Patient $patient, $covid19 = false) {
         // if (!$covid19) {
-            $testsCode=$patientRequest->results->map(function ($q)  {
-                return $q->test->name_en;
-            });
-            $testsCode= $testsCode->implode('-');
+        $testsCode = $patientRequest->results->map(function ($q) {
+            return $q->test->name_en;
+        });
+        $testsCode = $testsCode->implode('-');
         // }
-        $x=!$covid19?$patientRequest->results()->latest()->first()->value:$testsCode;
-        
-        $tests=Test::all();
-        $qrCode= (DNS2D::getBarcodePNG(config('app.LAB_NAME').
-        "\n".'name='.$patient->name.
-        "\n".'nationality='.$patient->nationality->name.
-        "\n".'identity='.$patient->identityTypes()->where('request_id',$patientRequest->id)->first()->name.
-        "\n".'identity number='.$patient->identityTypes()->where('request_id',$patientRequest->id)->first()->pivot->identity.
-        "\n".'created at='.$patientRequest->created_at->format('Y-m-d').
-        "\n".$x, 
-        'QRCODE', 3, 3));
-        $pdf = PDF::loadView('printables.print', ['patient' => $patient,'patientRequest'=> $patientRequest,'qr'=>$qrCode], [], ['format' => 'A4']);
+
+        $latestResult = $patientRequest->results()->latest()->first();
+        $x = !$covid19 ? $latestResult->value ?? $testsCode : $testsCode;
+
+        $tests = Test::all();
+        $qrCode = (DNS2D::getBarcodePNG(config('app.LAB_NAME') .
+            "\n" . 'name=' . $patient->name .
+            "\n" . 'nationality=' . $patient->nationality->name .
+            "\n" . 'identity=' . $patient->identityTypes()->where('request_id', $patientRequest->id)->first()->name .
+            "\n" . 'identity number=' . $patient->identityTypes()->where('request_id', $patientRequest->id)->first()->pivot->identity .
+            "\n" . 'created at=' . $patientRequest->created_at->format('Y-m-d') .
+            "\n" . $x,
+            'QRCODE', 3, 3));
+        $pdf = PDF::loadView('printables.print', ['patient' => $patient, 'patientRequest' => $patientRequest, 'qr' => $qrCode], [], ['format' => 'A4']);
         $fileName = str_replace('/', '-', random_int(0, 999999) . '_receipt.pdf');
         $path = public_path('/') . $fileName;
         $pdf->save($path);
-        $file= public_path().'/'. $fileName;
+        $file = public_path() . '/' . $fileName;
         $headers = array(
             'Content-Type: application/pdf',
-          ); 
-    	return response()->file($file, $headers)->deleteFileAfterSend(true);
+        );
+        return response()->file($file, $headers)->deleteFileAfterSend(true);
 
     }
-    
+
 }
 
