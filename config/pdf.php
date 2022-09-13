@@ -8,5 +8,6 @@ return [
 	'keywords'              => '',
 	'creator'               => 'Laravel Pdf',
 	'display_mode'          => 'fullpage',
-	'tempDir'               => base_path('../temp/')
+    'tempDir' => storage_path('tempdir'),
+//	'tempDir'               => base_path('../temp/')
 ];
