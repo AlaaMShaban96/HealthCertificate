@@ -109,13 +109,14 @@ class RequestService
             'QRCODE', 3, 3));
         $pdf = PDF::loadView('printables.print', ['patient' => $patient, 'patientRequest' => $patientRequest, 'qr' => $qrCode], [], ['format' => 'A4']);
         $fileName = str_replace('/', '-', random_int(0, 999999) . '_receipt.pdf');
-        $path = public_path('/') . $fileName;
-        $pdf->save($path);
-        $file = public_path() . '/' . $fileName;
-        $headers = array(
-            'Content-Type: application/pdf',
-        );
-        return response()->file($file, $headers)->deleteFileAfterSend(true);
+        return $pdf->stream($fileName);
+//        $path = public_path('/') . $fileName;
+//        $pdf->save($path);
+//        $file = public_path() . '/' . $fileName;
+//        $headers = array(
+//            'Content-Type: application/pdf',
+//        );
+//        return response()->file($file, $headers)->deleteFileAfterSend(true);
 
     }
 
