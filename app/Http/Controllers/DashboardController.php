@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $tests=Test::where('selected',1)->get();
         $identityTypes=IdentityType::all();
         $nationalitys=Nationality::all();
-        return view('new.index',compact('tests','identityTypes','nationalitys'));
+        return view('new2.index',compact('tests','identityTypes','nationalitys'));
     }
     public function unique()
     {

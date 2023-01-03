@@ -67,7 +67,7 @@
                         </td>
                         <td>
                             {{-- <div class="form-check"> --}}
-                                <input class="form-check-input" type="checkbox" id="selected{{$test->id}}" data-id="{{$test->id}}" name="selected" value="{{$test->selected}}" {{$test->selected?'checked':''}}>
+                                <input class="form-check-input selected" type="checkbox" id="selected{{$test->id}}" data-id="{{$test->id}}" name="selected" value="{{$test->selected}}" {{$test->selected?'checked':''}}>
                                 {{-- </div> --}}
                         </td>
                         <td>
@@ -146,7 +146,6 @@
 @endsection
 @section('script')
 <script>
-    console.log();
     var modal = document.getElementById('createModal');
     $(document).on("click", "#createModalOpen", function () {
         console.log($(this).data());
