@@ -11,7 +11,7 @@ class TestController extends Controller
     public function index()
     {
         $tests=Test::paginate(10);
-        return view('new.test.index',compact('tests'));
+        return view('new2.test.index',compact('tests'));
     }
     public function show(Test $test)
     {
