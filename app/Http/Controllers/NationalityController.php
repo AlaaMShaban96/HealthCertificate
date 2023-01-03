@@ -13,7 +13,7 @@ class NationalityController extends Controller
     public function index()
     {
         $nationalities=Nationality::paginate(10);
-        return view('new.nationality.index',compact('nationalities'));
+        return view('new2.nationality.index',compact('nationalities'));
     }
     public function show(Nationality $nationality)
     {

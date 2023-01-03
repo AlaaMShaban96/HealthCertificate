@@ -43,12 +43,18 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/plugins/charts/chart-apex.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/plugins/extensions/ext-component-toastr.css') }}">
   <!-- END: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
 
   <!-- BEGIN: Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/custom-rtl.css') }}">
   {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style-rtl.css') }}"> --}}
   <!-- END: Custom CSS-->
-
+  <style>
+    /* body {
+        font-family: 'Tajawal';font-size: 22px;
+        background-color: #8789ff;
+    } */
+</style>
 </head>
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
@@ -56,6 +62,32 @@
 
   @include('new2.layout.menu')
 
+   <!-- BEGIN: Content-->
+ <div class="app-content content ">
+  <div class="content-overlay"></div>
+  <div class="header-navbar-shadow"></div>
+  <div class="content-wrapper container-xxl p-0">
+      <div class="content-header row">
+      </div>
+      <div>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{  $error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endforeach
+        @endif
+        @if(Session::has('message'))
+
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('message') }}
+            </div>
+        @endif
+    </div>
+    @yield('contenter')
+    </div>
+  </div>
   <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -68,25 +100,9 @@
           <!-- Navbar -->
 
           <!-- / Navbar -->
-          <div class="container-xxl flex-grow-1 container-p-y text-end">
-            <div>
-                @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            {{  $error}}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endforeach
-                @endif
-                @if(Session::has('message'))
-
-                    <div class="alert alert-success" role="alert">
-                        {{ Session::get('message') }}
-                    </div>
-                @endif
-            </div>
-            @yield('contenter')
-          </div>
+          {{-- <div class="container-xxl flex-grow-1 container-p-y text-end">
+           
+          </div> --}}
           <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
@@ -109,10 +125,12 @@
 
      <!-- BEGIN: Vendor JS-->
      <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
- 
-     {{-- <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script> --}}
+     <script src="{{ asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
+      {{-- <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script> --}}
      <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
- 
+     <script src="{{ asset('/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') }}"></script>
+
+     {{-- <script src="../../../app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script> --}}
      <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
      <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
  
@@ -136,8 +154,8 @@
         //add confermation to delete
         $('.delete').on('click', function(e) {
                e.preventDefault();
-               var form = $(this).parents('form');
-               swal({
+               var form = $('#deleteForm'+$(this).data('id'));
+              new swal({
                    title: "هل أنت متأكد؟",
                    text: "سيتم حذف السجل بشكل دائم",
                    icon: "warning",

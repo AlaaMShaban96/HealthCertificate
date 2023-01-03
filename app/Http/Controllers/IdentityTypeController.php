@@ -11,7 +11,7 @@ class IdentityTypeController extends Controller
     public function index()
     {
         $identityTypes=IdentityType::paginate(10);
-        return view('new.identityType.index',compact('identityTypes'));
+        return view('new2.identityType.index',compact('identityTypes'));
     }
     public function show(IdentityType $identityType)
     {
