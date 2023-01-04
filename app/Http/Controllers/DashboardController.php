@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $test= Test::where('unique',1)->first();
         $identityTypes=IdentityType::all();
         $nationalitys=Nationality::all();
-        return view('new.unique.index',compact('test','identityTypes','nationalitys'));
+        return view('new2.unique.index',compact('test','identityTypes','nationalitys'));
     }
     public function unique_store(Request $request)
     {
@@ -49,7 +49,7 @@ class DashboardController extends Controller
     public function showRemovePage(Request $request)
     {
        $patients= Patient::filter($request->all())->orderBy('id', 'DESC')->paginateFilter(10);
-       return view('new.remove.index',compact('patients'));
+       return view('new2.remove.index',compact('patients'));
     }
     public function remove(DeleteRequest $request)
     {
