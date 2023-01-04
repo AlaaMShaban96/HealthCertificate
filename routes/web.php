@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\DashboardController;
@@ -25,6 +26,7 @@ Route::get('/print/patient/{patient}/request/{request}',[DashboardController::cl
 Route::resource('nationality', NationalityController::class);
 Route::resource('identityType', IdentityTypeController::class);
 Route::resource('patient', PatientController::class,['names' => 'patient']);
+Route::resource('branches', BranchController::class,['names' => 'branches']);
 Route::get('/request/{request}', [RequestController::class,'show']);
 Route::post('/request/{patient}', [RequestController::class,'store']);
 Route::put('/request/{patient}/update', [RequestController::class,'update']);
@@ -33,6 +35,7 @@ Route::resource('test', TestController::class);
 
 Route::post('/test/{test}/selected', [TestController::class,'selected']);
 Route::post('/test/{test}/unique', [TestController::class,'unique']);
+
 Route::get('/unique',[DashboardController::class,'unique'])->name('unique');;
 Route::post('/unique',[DashboardController::class,'unique_store']);
 Route::get('/remove',[DashboardController::class,'showRemovePage'])->name('remove');
