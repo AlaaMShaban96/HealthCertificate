@@ -134,7 +134,8 @@
      {{-- <script src="../../../app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script> --}}
      <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
      <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
- 
+     @include('sweetalert::alert')
+
       {{-- <script src="{{ asset('app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script> --}}
      <!-- END: Page JS-->
  

@@ -169,6 +169,7 @@ return [
         EloquentFilter\ServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -233,7 +234,7 @@ return [
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
-
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
     ],
 
 ];
