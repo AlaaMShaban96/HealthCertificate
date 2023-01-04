@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Patient;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class IdentityType extends Model
 {
@@ -17,6 +18,6 @@ class IdentityType extends Model
      */
     public function patients()
     {
-        return $this->belongsToMany(Patient::class, 'identity_types_patient')->withPivot('identity','request_id');
+        return $this->belongsToMany(Patient::class, 'identity_types_patient','identity_type_id','patient_id')->withPivot('identity','request_id');
     }
 }

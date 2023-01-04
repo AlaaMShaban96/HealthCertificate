@@ -156,20 +156,42 @@
         $('.delete').on('click', function(e) {
                e.preventDefault();
                var form = $('#deleteForm'+$(this).data('id'));
-              new swal({
-                   title: "هل أنت متأكد؟",
-                   text: "سيتم حذف السجل بشكل دائم",
-                   icon: "warning",
-                   buttons: [
-                       'الغاء',
-                       'حذف'
-                   ],
-                   dangerMode: true,
-               }).then(function(isConfirm) {
-                   if (isConfirm) {
-                       form.submit();
-                   }
-               });
+              // new swal({
+              //      title: "هل أنت متأكد؟",
+              //      text: "سيتم حذف السجل بشكل دائم",
+              //      icon: "warning",
+              //      buttons: [
+              //          'الغاء',
+              //          'حذف'
+              //      ],
+              //      dangerMode: true,
+              //  }).then(function(isConfirm) {
+              //      if (isConfirm) {
+              //          form.submit();
+              //      }
+              //  });
+
+
+               Swal.fire({
+                      title: "هل أنت متأكد؟",
+                      text: "سيتم حذف السجل بشكل دائم",
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'نعم , سيتم الحدف',
+                      cancelButtonText: 'الغاء'
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        Swal.fire(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        )
+                        form.submit();
+
+                      }
+                    });
            });
        </script>
     <!-- Place this tag in your head or just before your close body tag. -->

@@ -22,13 +22,13 @@ class PatientController extends Controller
         $identityTypes=IdentityType::all();
         $tests=Test::where('selected',1)->get();
        $patients= Patient::filter($request->all())->orderBy('id', 'DESC')->paginateFilter(10);
-       return view('new.patient.index',compact('patients','identityTypes','tests'));
+       return view('new2.patient.index',compact('patients','identityTypes','tests'));
     }
     public function show(Patient $patient)
     {
         $identityTypes=IdentityType::all();
         $nationalitys=Nationality::all();
-        return view('new.patient.edit',compact('patient','identityTypes','nationalitys'));
+        return view('new2.patient.edit',compact('patient','identityTypes','nationalitys'));
     }
     public function store(Request $request)
     {

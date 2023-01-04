@@ -74,7 +74,7 @@ class RequestService
         }else {
             // dd( $patient->identityTypes());
             // $patient->identityTypes()->detach($request->identity_type_id);
-            $patient->identityTypes()->sync(1,
+            $patient->identityTypes()->syncWithPivotValues(1,
             [
                 'identity_type_id'=>$request->identity_type_id,
                 'request_id'=>$patientRequest->id,
@@ -102,9 +102,9 @@ class RequestService
         $qrCode = (DNS2D::getBarcodePNG(config('app.LAB_NAME') .
             "\n" . 'name=' . $patient->name .
             "\n" . 'nationality=' . $patient->nationality->name .
-            "\n" . 'identity=' . $patient->identityTypes()->where('request_id', $patientRequest->id)->first()->name .
-            "\n" . 'identity number=' . $patient->identityTypes()->where('request_id', $patientRequest->id)->first()->pivot->identity .
-            "\n" . 'created at=' . $patientRequest->created_at->format('Y-m-d') .
+            "\n" . 'identity=' . $patient->identityTypes()->where('request_id', $patientRequest->id)->first()->name??"------" .
+            "\n" . 'identity number=' . $patient->identityTypes()->where('request_id', $patientRequest->id)->first()->pivot->identity??"-------" .
+            "\n" . 'created at=' . $patientRequest->created_at->format('Y-m-d')??"---------" .
             "\n" . $x,
             'QRCODE', 3, 3));
         $pdf = PDF::loadView('printables.print', ['patient' => $patient, 'patientRequest' => $patientRequest, 'qr' => $qrCode], [], ['format' => 'A4']);

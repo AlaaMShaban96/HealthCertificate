@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\IdentityType;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,7 +30,7 @@ class Patient extends Model
      */
     public function identityTypes()
     {
-        return $this->belongsToMany(IdentityType::class, 'identity_types_patient')->withPivot('identity','request_id');
+        return $this->belongsToMany(IdentityType::class, 'identity_types_patient','patient_id','identity_type_id')->withPivot('identity','request_id');
     }
     public function getIdentityAttribute()
     {
