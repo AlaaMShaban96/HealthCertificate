@@ -1,68 +1,200 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+<!-- BEGIN: Head-->
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
+  <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+  <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+  <meta name="author" content="PIXINVENT">
+  <title>Dashboard ecommerce - Vuexy - Bootstrap HTML admin template</title>
+  <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
-        {{-- <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet"> --}}
-		<link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <!-- BEGIN: Vendor CSS-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors-rtl.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/charts/apexcharts.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/toastr.min.css') }}">
+  <!-- END: Vendor CSS-->
 
-        <!-- Styles -->
-        {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
-        <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+  <!-- BEGIN: Theme CSS-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/bootstrap.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/bootstrap-extended.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/colors.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/components.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/themes/dark-layout.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/themes/bordered-layout.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/themes/semi-dark-layout.css') }}">
 
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> --}}
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <!-- Scripts -->
-        @yield('style')
-    </head>
-    <body class="font-sans antialiased">
-        @include('layout.header')
-        <main>
-            <div class="nav">
-                <div>
-                    @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        <label class=" alert-error">
-                            {{  $error}}
-                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        </label>
-                    @endforeach
-                @endif
-                @if(Session::has('message'))
-                    <div class="alert alert-success">
-                        {{ Session::get('message') }}
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    </div>
-                @endif
+  <!-- BEGIN: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/core/menu/menu-types/vertical-menu.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/pages/dashboard-ecommerce.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/plugins/charts/chart-apex.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/plugins/extensions/ext-component-toastr.css') }}">
+  <!-- END: Page CSS-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
+
+  <!-- BEGIN: Custom CSS-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/custom-rtl.css') }}">
+  {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style-rtl.css') }}"> --}}
+  <!-- END: Custom CSS-->
+  <style>
+    /* body {
+        font-family: 'Tajawal';font-size: 22px;
+        background-color: #8789ff;
+    } */
+</style>
+</head>
+
+<body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
+  @include('layout.navbar',['title' => $title,'subtitle'=>$subtitle])
+
+  @include('layout.menu')
+
+   <!-- BEGIN: Content-->
+ <div class="app-content content ">
+  <div class="content-overlay"></div>
+  <div class="header-navbar-shadow"></div>
+  <div class="content-wrapper container-xxl p-0">
+      <div class="content-header row">
+      </div>
+      <div>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{  $error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <div class="userArea">
-                    <a href="" >
-                        {{-- <img src="data:image/png;base64,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"/> --}}
-                    </a>
-                </div>
+            @endforeach
+        @endif
+        @if(Session::has('message'))
+
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('message') }}
             </div>
+        @endif
+    </div>
+    @yield('contenter')
+    </div>
+  </div>
+  <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page" >
+          <!-- Navbar -->
+
+          <!-- / Navbar -->
+          {{-- <div class="container-xxl flex-grow-1 container-p-y text-end">
+           
+          </div> --}}
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <div class="buy-now">
+      <a
+        href="https://www.facebook.com/AlaaMShaban96/"
+        title="Alaa M Shaban account"
+        target="_blank"
+        class="btn btn-danger btn-buy-now"
+        >Alaa Mohammed Shaban</a
+      >
+    </div>
+
+     <!-- BEGIN: Vendor JS-->
+     <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+     <script src="{{ asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
+      {{-- <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script> --}}
+     <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
+     <script src="{{ asset('/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') }}"></script>
+
+     {{-- <script src="../../../app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script> --}}
+     <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+ 
+      {{-- <script src="{{ asset('app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script> --}}
+     <!-- END: Page JS-->
+ 
+     <script>
+         $(window).on('load', function() {
+             if (feather) {
+                 feather.replace({
+                     width: 14,
+                     height: 14
+                 });
+             }
+         })
+     </script>
+
+    <!-- Page JS -->
+    @yield('script')
+    <script>
+        //add confermation to delete
+        $('.delete').on('click', function(e) {
+               e.preventDefault();
+               var form = $('#deleteForm'+$(this).data('id'));
+              // new swal({
+              //      title: "هل أنت متأكد؟",
+              //      text: "سيتم حذف السجل بشكل دائم",
+              //      icon: "warning",
+              //      buttons: [
+              //          'الغاء',
+              //          'حذف'
+              //      ],
+              //      dangerMode: true,
+              //  }).then(function(isConfirm) {
+              //      if (isConfirm) {
+              //          form.submit();
+              //      }
+              //  });
 
 
-            @yield('content')
-        </main>
-        <script src="{{ asset('js/app.js') }}" defer></script>
-		<script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+               Swal.fire({
+                      title: "هل أنت متأكد؟",
+                      text: "سيتم حذف السجل بشكل دائم",
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'نعم , سيتم الحدف',
+                      cancelButtonText: 'الغاء'
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        Swal.fire(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        )
+                        form.submit();
 
-
-
-        {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
-		{{-- <script src="{{ asset('js/jquery.steps.js')}}"></script> --}}
-
-		<script src="{{ asset('js/main.js')}}"></script>
-        @yield('script')
-
-    </body>
+                      }
+                    });
+           });
+       </script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
 </html>

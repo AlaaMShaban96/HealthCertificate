@@ -1,175 +1,293 @@
-@extends('layout.app')
-
-@section('style')
+@extends('layout.app',['title' => "الحالات",'subtitle'=>'قائمة الحالات'])
 
 
-@section('content')
-<div class="nav">
-    <div><h2>الحالات</h2>
 
-        <form action="{{url('patient')}}" method="GET">
-            <input class="search" name="name" placeholder="البحث" />
+@section('contenter')
+  <div class="row">
+    <div class="col-12">
 
-            <label for="start">من:</label>
-            <input type="date"  class="search"  id="start" placeholder="dd-mm-yyyy"     name="date[start]" >
-            <label for="start">الي:</label>
-            <input type="date"  class="search"  id="end" placeholder="dd-mm-yyyy"    name="date[end]" >
-            <button  type="submit"  class="button">بحث</button>
+      <div class="col-xxl mb-3">
+        <div class="card ">
+          {{-- <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">Basic with Icons</h5>
+          </div> --}}
+          <form action="{{url('patient')}}" method="GET">
 
+            <div class="card-body row">
+              <div class="col-lg-3 mb-3">
+                <label class="form-label-lg fw-bold" for="basic-icon-default-fullname ">رقم الإصال</label>
+                <div class="input-group input-group-merge">
+                  <span id="basic-icon-default-fullname2" class="input-group-text "><i class="bx bx-user"></i></span>
+                  <input type="text" class="form-control" value="{{request('request_number')}}" name="request_number" tabindex='1' id="basic-icon-default-fullname" placeholder="البحت برقم الإصال" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2">
+                </div>
+              </div>
+              <div class="col-lg-3 mb-3">
+                <label class="form-label-lg fw-bold" for="basic-icon-default-fullname ">اسم المريض</label>
+                <div class="input-group input-group-merge">
+                  <span id="basic-icon-default-fullname2" class="input-group-text "><i class="bx bx-user"></i></span>
+                  <input type="text" class="form-control" value="{{request('name')}}" name="name" tabindex='2' id="basic-icon-default-fullname" placeholder=" اسم المريض " aria-label="John Doe" aria-describedby="basic-icon-default-fullname2">
+                </div>
+              </div>
+              <div class="col-lg-3 mb-3">
+                <label class="form-label-lg fw-bold" for="basic-icon-default-fullname ">  من تاريخ</label>
+                <div class="input-group input-group-merge">
+                  <span id="basic-icon-default-fullname2" class="input-group-text "><i class="bx bx-user"></i></span>
+                  <input class="form-control" type="date" placeholder="dd-mm-yyyy"  value="{{request('date[start]')}}" name="date[start]" tabindex='3'  id="html5-date-input">
+                </div>
+              </div>
+
+              <div class="col-lg-3 mb-3">
+                <label class="form-label-lg fw-bold" for="basic-icon-default-fullname ">الي تاريخ</label>
+                <div class="input-group input-group-merge">
+                  <span id="basic-icon-default-fullname2" class="input-group-text "><i class="bx bx-user"></i></span>
+                  <input class="form-control" type="date" placeholder="dd-mm-yyyy"  value="{{request('date[end]')}}" name="date[end]" tabindex='4'   id="html5-date-input">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-10">
+
+                  <button type="submit" class="btn btn-primary">
+                    <i data-feather='search'></i>
+                  </button>
+                </div>
+              </div>
+          </div>
         </form>
-    {{-- </div>
-    <div> --}}
 
+        </div>
+      </div>
     </div>
 
-</div>
-<table>
-    <thead>
-        <td>الرقم</td>
-        <td>الاسم</td>
-        <td>تاريخ الميلاد</td>
-        <td></td>
-        {{-- <td></td> --}}
-    </thead>
-    <tbody>
-    @foreach ($patients as $patient)
-        <tr>
-            <td>{{$patient->id}}</td>
-            <td>
-                <a class="edit" href="{{url('/request/'.$patient->id)}}">
-                    {{$patient->name}}
-                </a>
-            </td>
-            <td>{{$patient->birth_date}}</td>
-            {{-- <td><img src="{{$patient->photo}}" alt=""style="width: 22%;"></td> --}}
-            <td>
-                <form action="{{url('/patient/'.$patient->id)}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <a class="edit" href="{{url('/patient/'.$patient->id)}}"><i class="fa fa-pencil fa-2x"></i></a>
-                    <a class="edit" id="createModalOpen"
-                    data-id="{{$patient->id}}"
-                    data-identityType_number="{{$patient->identity}}"
-                    data-identity_type_id="{{$patient->identity_type_id}}"
-                    data-requesting_authority="{{$patient->requesting_authority}}"
-                    data-request_number="{{$patient->request_number}}"
-                    href="#"
 
-                    >
-                    <i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
-
-                    {{-- <i class="fa fa-print fa-2x" aria-hidden="true"></i> --}}
-                </a>
-                    <button class="delete" type="submit"><i class="fa fa-trash fa-2x"></i></button>
-
-                </form>
-            </td>
-            {{-- <td>
-                <a class="edit" href="#">
-                    <i class="fa fa-file-text fa-2x" aria-hidden="true"></i>
-
-                </a>
-            </td> --}}
-        </tr>
-    @endforeach
-    </tbody>
-
-</table>
-<div class="table--footer">
-    {{$patients->links('pagination.semantic-ui')}}
-    {{-- {{$nationalities->links('pagination.semantic-ui')}} --}}
-
-</div>
+  </div>
 
 
-<div id="createModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content-patient">
-        <div class="modal-header">
-            <h2>اصدار شهادة</h2>
-            {{-- <button type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;"> طباعة</button> --}}
 
 
-            {{-- <span ><i class="fa fa-file-text" aria-hidden="true"></i></span> --}}
-            <span class="close">&times;</span>
+
+
+
+
+
+
+
+
+
+
+<!-- list and filter start -->
+<div class="card">
+  <div class="card-body border-bottom">
+      <h4 class="card-title"> عرض المستندات</h4>
+      <div class="row">
+          <div class="col-md-4 user_role"></div>
+          <div class="col-md-4 user_plan"></div>
+          <div class="col-md-4 user_status"></div>
+      </div>
+  </div>
+  <div class="card-datatable table-responsive pt-0">
+      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+        <div class="d-flex justify-content-between align-items-center header-actions mx-2 row mt-75">
+          <div class="col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
+            <div class="dataTables_length" id="DataTables_Table_0_length">
+               
+            </div>
+          </div>
+            <div class="col-sm-12 col-lg-8 ps-xl-75 ps-0">
+              <div class="dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap">
+                <div class="me-1">
+                   
+                </div>
+                <div class="dt-buttons d-inline-flex mt-50 mb-2">
+                  <button class="dt-button add-new btn btn-primary"
+                      tabindex="0"
+                      type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalCenter"
+                      id="createModalOpen" data-action="create"
+                      >
+                    <span>اضافة مستند</span>
+                  </button> 
+                </div>
+            </div>
+          </div>
+            </div>
+            <table class="user-list-table table dataTable no-footer dtr-column" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+              <thead class="table-light">
+                  <tr role="row">
+                    <th class="control sorting_disabled" rowspan="1" colspan="1" style="width: 138.017px;" aria-label="">رقم</th>
+                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 138.017px;" aria-sort="descending" >الاسم</th>
+                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 138.017px;" aria-sort="descending" >تاريخ الميلاد</th>
+                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 138.017px;" aria-sort="descending" > </th>
+                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 138.017px;" aria-label="Actions">العمالية</th>
+                  </tr>
+              </thead>
+              <tbody>
+                @foreach ($patients as $key=> $patient)
+                  <tr class="odd">
+                    <td>{{ $key }}</td>
+                    <td>
+                      <a class="edit" href="{{url('/request/'.$patient->id)}}">
+                          {{$patient->name}}
+                      </a>
+                    </td>
+                    <td>{{$patient->birth_date}}</td>
+                    <td>
+                      <a  id="createModalOpen"
+                                      data-bs-toggle="modal" data-bs-target="#modalCenter"
+                                      data-id="{{$patient->id}}"
+                                      data-identityType_number="{{$patient->identity}}"
+                                      data-identity_type_id="{{$patient->identity_type_id}}"
+                                      data-requesting_authority="{{$patient->requesting_authority}}"
+                                      data-request_number="{{$patient->request_number}}"
+                                      data-action="edit"
+                                  href="javascript:void(0);"
+                                  >
+                          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABA0lEQVRIS9WV4RGCMAyFExfQDdQJZAScQMoEOplOQHUCGUE3wA2cwJh6lCtQaK9e9eAuf2jzviTtvSJE/jCyPrQAUsqUfxw5ViFgAqg4DkKIUue3AOeiqBBxGSKucxQkE2JtBVyk5HWAnRBBo7Plt4T+DnAV8HUH0wToqodulnkhgkYUHWBWPs0z+GkHLgsJOmSXqKvDrtk92ezmXVE2qBvHll3yqdbYdReceOVIenuJHlmeN27ct2uik81RNUQJjokT4n7Qrm3jUNXOiEpA3ChIDUiA6P5CTHVXQ6P0smUT8hHyFK+L8TvGBsLbfSq3PjgulIKoPa6xmDpeI3KBx9ajA97iedIZzZfm6AAAAABJRU5ErkJggg=="/>
+                        </a>
+                      </td>
+                      <td>
+                          <div class="btn-group">
+                            <button class="btn btn-flat-info dropdown-toggle waves-effect" type="button" id="dropdownMenuButton300" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i data-feather='grid'></i>
+                            </button>
+
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton300">
+                                  <a class="dropdown-item" href="{{url('/patient/'.$patient->id)}}">
+                                    <i data-feather='edit-3'></i> تعديل
+                                  </a>
+                                  <a class="dropdown-item delete" data-id="{{$patient->id}}" href="#"><i data-feather='delete'></i> حدف</a>
+                              </div>
+                          </div>
+                          <form id="deleteForm{{ $patient->id }}" action="{{url('/patient/'.$patient->id)}}" method="post">
+                              @csrf
+                              @method('DELETE')
+                          
+                          </form>
+                        </td>
+                    </tr>
+                @endforeach
+              </tbody>
+            </table>
+           {{ $patients->links('pagination.bootstrap-4') }}
+          </div>
         </div>
-        <div class="modal-body">
+ 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+    <div class="row gy-3">
+          <div class="col-lg-4 col-md-6">
+            <div class="mt-3">
+              <!-- Button trigger modal -->
+
+
+              <!-- Modal -->
+              <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                 <form action="{{url('')}}" id="formCreateRequest" method="post">
-                @csrf
-                {{-- <input id="method" type="hidden" name="_method" value="PUT"> --}}
+                    @csrf
+                    <input id="method" type="hidden" name="_method" value="PUT">
 
-                <div style="display: flex;" >
-                    <div style="width: 50%;padding-left: 10%;">
-                        <div class='input-style'>
-                            <label>رقم الاصال<label>
-                            <input tabindex='4' name='request_number' id="request_number" type="text" placeholder="الجيهة الطالبة لي الشهادة" class="form-control">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="modalCenterTitle">إصدار شهادة صحية</h5>
+                        {{-- <button type="submit" class="btn btn-primary">حفظ </button> --}}
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
                         </div>
-                        <div class='input-style'>
-                            <label>الجيهة<label>
-                            <input tabindex='4' name='requesting_authority' id="requesting_authority" type="text" placeholder="الجيهة الطالبة لي الشهادة" class="form-control">
-                        </div>
-                        <div class='input-style'>
-                            <label>نوع الهوية<label>
-                            <select name="identity_type_id" id="identity_type_id" class="form-control">
-                                @foreach ($identityTypes as $identityType)
-                                <option value="{{$identityType->id}}">{{$identityType->name}}</option>
+
+                        <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 mt-4">
+                                @foreach ($tests as $test)
+                                    <div class="form-check form-switch mb-4">
+                                        <input class="form-check-input" type="checkbox"name="tests[]" value="{{$test->id}}" id="flexSwitchCheckDefault">
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">{{$test->name_en}} | {{$test->name_ar}}</label>
+                                    </div>
                                 @endforeach
-                            </select>
+                            </div>
+                            <div class="col-lg-6">
+
+                                <div class="col-12 mb-3">
+                                    <label for="nameWithTitle" class="form-label-lg"> <strong>  رقم الاصال </strong></label>
+                                    <input type="number" required  name='request_number' id="request_number" class="form-control" placeholder=" رقم الاصال"/>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="nameWithTitle" class="form-label-lg"><strong>الجيهة</strong></label>
+                                    <input type="text" required  name='requesting_authority' id="requesting_authority" class="form-control" placeholder="الجيهةالطالبة لي الشهادة"/>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="nameWithTitle" class="form-label-lg"><strong>نوع الهوية</strong></label>
+                                    {{-- <input type="text"name="positive" id="requesting_authority" class="form-control" placeholder="عندما تكون نتيجة التحليل موجبة"/> --}}
+                                    <select name="identity_type_id" required  id="identity_type_id" class="form-select">
+                                        @foreach ($identityTypes as $identityType)
+                                        <option value="{{$identityType->id}}">{{$identityType->name}}</option>
+                                        @endforeach
+                                      </select>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="nameWithTitle" class="form-label-lg"><strong>رقم الهوية</strong></label>
+                                    <input type="text" required  id="identityType_number" name='identityType_number' class="form-control" placeholder="رقم الهوية"/>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class='input-style'>
-                            <label>رقم الهوية<label>
-                            <input tabindex='5' id="identityType_number" name='identityType_number' type="text" placeholder="رقم الهوية" class="form-control">
+
                         </div>
-                        <br>
-                        <br>
-                        <div class='input-style'>
-                            <button type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;"> حفظ</button>
+
+                        <div class="modal-footer ">
+
+                        <button type="button" class="btn btn-success" id="newRequest">انشاء جديد</button>
+
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            الغاء
+                        </button>
+                        <button type="submit" class="btn btn-primary">حفظ </button>
                         </div>
-                        {{-- <div class='input-style'>
-                            <button type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;"> حفظ</button>
-                        </div> --}}
                     </div>
-                    <div style="width: 50%;">
-                        <table class="table-check">
-                            @foreach ($tests as $test)
-                            <tr>
-                              <td>
-                                 <label class="switch">
-                                    <input id="checkboxinp" type="checkbox" name="tests[]" value="{{$test->id}}">
-                                    <div class="slider round"></div>
-                                </label>
-                              </td>
-                              <td>
-                                {{$test->name_en}}
-                              </td>
-
-                            </tr>
-                            @endforeach
-
-                          </table>
-
                     </div>
+                </form>
+              </div>
+            </div>
+          </div>
 
-                </div>
-                <div style="text-align: end;">
-                    <a class="edit" href="#" id="newRequest">
-                        جديد
-                        <i class="fa fa-file-text fa-2x" aria-hidden="true"></i>
-
-                    </a>
-                </div>
-
-            </form>
-        </div>
     </div>
-
-</div>
-</div>
+    <!--/ Bootstrap modals -->
 @endsection
 @section('script')
 <script>
-    var tests = @json($tests,JSON_PRETTY_PRINT);
     var modal = document.getElementById('createModal');
 
     $(document).on("click", "#createModalOpen", function () {
@@ -182,13 +300,17 @@
         document.getElementById('formCreateRequest').action=url;
         document.getElementById('identity_type_id').value=$(this).data().identity_type_id;
         document.getElementById('identityType_number').value=$(this).data().identitytype_number;
-        modal.style.display = 'block';
+        // modal.style.display = 'block';
+        document.getElementById('method').value='PUT';
+
 
     });
     $(document).on("click", "#newRequest", function () {
         let action= document.getElementById('formCreateRequest').action;
         let url=action.split('/update')[0];
         console.log(url);
+        document.getElementById('method').value='POST';
+
         document.getElementById('formCreateRequest').action=url;
         document.getElementById('identity_type_id').value=1;
         document.getElementById('identityType_number').value="";
@@ -201,20 +323,6 @@
 
     });
 
-    // <script >
-            // function filldate(){
-                // var d=Date.now() // date received from card
-    // document.getElementById('cardexpirydate1').value=d.split('/').reverse().join("-");
-    // document.getElementById('cardexpirydate2').value=d.split('/').reverse().join("-");
-
-
-//     var d=new Date().toJSON().slice(0,10).replace(/-/g,'/');// date received from card
-// console.log(d);
-            // function filldate(){
-    // document.getElementById('cardexpirydate1').value=d;
-    // document.getElementById('cardexpirydate2').value=d;
-    // }
-        //
 </script>
 
 

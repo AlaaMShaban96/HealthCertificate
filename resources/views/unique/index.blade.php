@@ -1,183 +1,138 @@
-@extends('layout.app')
-
+@extends('layout.app',['title' => $test->name_ar,'subtitle'=>$test->name_en])
 @section('style')
 <style>
   .input-style{
     margin-left: 5%;
     margin-top: 3%;
-    
+
   }
-  #my_camera{
- width: 320px;
- height: 240px;
- /* border: 1px solid black; */
-}
   #results { padding:20px; border:1px solid; background:#ccc; }
   </style>
 @endsection
-
-@section('content')
-
-@if (isset($test))
-<div class="nav">
-
-  {{-- <form action="{{url('/patient')}}" method="GET">
-      <input class="search" name="name" placeholder="البحث" />
-  </form> --}}
-  <div><h2> {{$test->name_ar}} / {{$test->name_en}}</h2></div>
-
-</div>
-
-{{-- <a id="createModalOpen" href="#" class="button">اضافة جنسية</a> --}}
-{{-- </div> --}}
-
+@section('contenter')
 <form target="_blank" action="{{url('/unique')}}" method="POST" enctype="multipart/form-data">
-@csrf
-@method('POST')
-<div id="wizard">
-    <section>
+    @csrf
+    @method('POST')
+        {{-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">الشهادة الصحية/</span> اصدار</h4> --}}
+        <!-- Basic Layout -->
+        <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">بيانات شهادة الخلو من  {{$test->name_ar}}</h5>
+                <small class="text-muted float-end">يرجآ التأكد من ادخال جميع الحقول</small>
+            </div>
+            <div class="card-body row">
+                <div class="mb-3 col-md-12">
+                    <label class="form-label-lg" for="basic-default-fullname">الاسم</label>
+                    <input required tabindex='1' name='name' type="text" class="form-control" id="basic-default-fullname" placeholder="الاسم التلاتي">
+                </div>
+                <div class="mb-3 col-md-12">
+                    <label class="form-label-lg" for="basic-default-company">رقم اﻹصال</label>
+                    <input tabindex='1' name='request_number' type="number" class="form-control" id="basic-default-company" placeholder="رقم اﻹصال">
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label class="form-label-lg" for="basic-default-fullname">تاريخ الميلاد</label>
+                        <input required tabindex='3' name='birth_date'   class="form-control" type="date" value="2021-06-18" id="html5-date-input">
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="exampleFormControlSelect1" class="form-label-lg">الجنسية</label>
+                    <select required name="nationality_id"   class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                        @foreach ($nationalitys as $nationality)
+                        <option value="{{$nationality->id}}">{{$nationality->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label class="form-label-lg" for="basic-default-company">الجيهة الطالبة للشهادة</label>
+                    <input required tabindex='4' name='requesting_authority' type="text" class="form-control" id="basic-default-company" placeholder="الجيهة الطالبة للشهادة">
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="exampleFormControlSelect1" class="form-label-lg">الجنس</label>
+                    <select required  name="gender" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                        <option value="ذكر">ذكر</option>
+                        <option value="انثي">انثي</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label class="form-label-lg" for="basic-default-company">رقم الهوية</label>
+                    <input required tabindex='5' name="identityType_number"  type="text" class="form-control" id="basic-default-company" placeholder="رقم اﻹصال">
+                </div>
 
-       <div class="form-header">
-        <div class="avartar">
-          <i  id="closeCamera" class="fa fa-times-circle fa-2x" aria-hidden="true" style="margin-left: 9%;visibility: hidden;"  onClick="closeCamera()"></i>
-          <div id='my_camera' >
-            <img src="images/avartar.png" alt="">
+                <div class="mb-3 col-md-6">
+                    <label for="exampleFormControlSelect1" class="form-label-lg">توع الهوية</label>
+                    <select required  name=' identity_type_id'class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                        @foreach ($identityTypes as $identityType)
+                        <option value="{{$identityType->id}}">{{$identityType->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-          </div>
-          {{-- <a href="#" id='my_camera'> --}}
-          {{-- </a> --}}
-          <div class="avartar-picker">
-            <input type="file" name="file-1" id="file-1" class="inputfile" >
-            <input type="text" name="photo" id="photo" class="inputfile" >
-            <label id="zmdi-camera" for="file-1" style="display:none;" >
-              <i  class="zmdi zmdi-camera"></i>
-              <span>تحميل صورة</span>
-            </label>
-            <button id="take_snapshot" type="button"onClick="take_snap()" style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;display: none;"> التقاط</button>
-            <button id="open_camera" type="button"onClick="openCamera()"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;display: inline;"> الكاميرة</button>
-
-          </div>
-          <br>
-         
-         
-         {{-- <button type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;">طباعة</button> --}}
-
-         
+                <button type="submit" class="btn btn-primary">حفظ</button>
+            </div>
+            </div>
         </div>
-        
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">التقاط صورة</h5>
+                    <small class="text-muted float-end">الكاميرة</small>
+                </div>
+                <div class="card-body">
+                    <form>
+                    <div class="mb-3">
 
-          <div class="form-group ">
-            <div class='input-style'>
-              <label>الاسم<label>
-              <input required tabindex='1' name='name' type="text" placeholder="الاسم" class="form-control">
-            </div>
-            <div class='input-style'>
-              <label>رقم الإصال<label>
-              <input  tabindex='1' name='request_number' type="number" placeholder="رقم الاصال في المنظومة" class="form-control">
-            </div>
-                <div style="display: flex;" >
-                    <div style="width: 50%;">
-                      
-                      <div class='input-style'>
-                        <label>تاريخ الميلاد<label>
-                        <input required tabindex='3' name='birth_date' type="date" placeholder="تاريخ الميلاد" class="form-control">
-                      </div>
-                      <div class='input-style'>
-                        <label>الجنس<label>
-                          <select required  name="gender" id="" class="form-control">
-                            <option value="ذكر">ذكر</option>
-                            <option value="انثي">انثي</option>
-                          </select>
-                      </div>
-                    </div>
-                    <div style="width: 50%;">
-                      
-                      <div class='input-style'>
-                        <label>الجنسية<label>
-                          <select required name="nationality_id" id="" class="form-control">
-                            @foreach ($nationalitys as $nationality)
-                            <option value="{{$nationality->id}}">{{$nationality->name}}</option>
-                            @endforeach
-                          </select>
-                      </div>
-                        <div class='input-style'>
-                          <label>الجيهة<label>
-                          <input required tabindex='4' name='requesting_authority' type="text" placeholder="الجيهة الطالبة لي الشهادة" class="form-control" value="لغرض السفر">
+                        <div class="avartar">
+                            <div id='my_camera' >
+                            <img src="{{asset('images/avartar.png')}}" alt="">
+
+                            </div>
+
+                            <div class="avartar-picker">
+                            {{-- <input type="file" name="file-1" id="file-1" class="inputfile form-control" > --}}
+                            {{-- <input type="text" name="photo" id="photo" class="inputfile" > --}}
+                            <label id="zmdi-camera" for="file-1" style="display:none;" >
+                                <i  class="zmdi zmdi-camera"></i>
+                                <span>تحميل صورة</span>
+                            </label>
+                            <br>
+                            <br>
+
+                            <button id="take_snapshot" type="button"onClick="take_snap()" class="btn btn-success" style="display: none;">التقاط</button>
+                            <button id="closeCamera" type="button"onClick="close_Camera()" class="btn btn-danger" style="visibility: hidden;">الغاء</button>
+                            <button id="open_camera" type="button"onClick="openCamera()"class="btn btn-primary" >فتح الكاميرا</button>
+
+                            </div>
+                            <br>
+                            {{-- <div class="mb-3" style="visibility: hidden;">
+                                <label class="form-label-lg" for="basic-default-fullname">الصورة</label> --}}
+                                <input  style="visibility: hidden;" type="text" name="photo" id="photo" class="form-control" id="basic-default-fullname" placeholder="John Doe">
+                            {{-- </div> --}}
                         </div>
-
                     </div>
-                  
+                    </form>
                 </div>
-                
-                <div style="display: flex;" >
-                    <div style="width: 50%;">
-                      
-                      <div class='input-style'>
-                        <label>نوع الهوية<label>
-                          <select required name="identity_type_id" id="identity_type_id" class="form-control"  >
-                            @foreach ($identityTypes as $identityType)
-                            <option  value="{{$identityType->id}}">{{$identityType->name}}</option>
-                            @endforeach
-                          </select>
-                      </div>
-                        {{-- <div class='input-style'>
-                          <label>الجيهة<label>
-                          <input tabindex='5' type="text" placeholder="Last Name" class="form-control">
-                        </div> --}}
-
+            </div>
+            <div class="card mb-4">
+                <h5 class="card-header">تحاليل</h5>
+                <div class="card-body">
+                    {{-- @foreach ($tests as $test) --}}
+                    <div class="form-check form-switch mb-2">
+                        <input class="form-check-input" type="checkbox"name="tests[]" value="{{$test->id}}" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">{{$test->name_en}} | {{$test->name_ar}}</label>
                     </div>
-                    <div style="width: 50%;">
-                      <div class='input-style'>
-                        <label>رقم الهوية<label>
-                        <input required tabindex='5' name='identityType_number' type="text" placeholder="رقم الهوية" class="form-control">
-                      </div> 
-                      
-                        
+                    {{-- @endforeach --}}
 
-                    </div>
-                  
+
                 </div>
-                <table class="table-check">
-                  {{-- @foreach ($tests as $test) --}}
-                  <tr>
-                    <td>
-                       <label class="switch">
-                          <input id="checkboxinp" type="checkbox" name="tests[]" value="{{$test->id}}">
-                          <div class="slider round"></div>     
-                      </label>
-                    </td>
-                    <td>
-                      {{$test->name_en}}
-                    </td>
-                    <td>
-                      {{$test->name_ar}}
-                    </td>
-                  </tr>
-                  {{-- @endforeach --}}
-                  
-                </table>
-                <br>
-                <button  type="submit"style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;"> حفظ</button>
-                <button  onClick="document.location.reload(true)"style="width: 33%;height: 38px;border-radius: 22px;background-color: #79f567;border: 0;color: white;margin-left: 4%;"> جديد</button>
-                {{-- <button type="submit"> حفظ</button> --}}
-                {{-- <a href="#" type="submit" style="width: 33%;height: 38px;border-radius: 22px;background-color: #67a5f5;border: 0;color: white;margin-left: 4%;" target="_blank"><a> --}}
-                
-       </div>
-       
-    </section>
-     
-</div>
+              </div>
+            </div>
+        </div>
+
 </form>
-
-@else
-    <h1>يجب اختيار تحليل قبل كل شي</h1>
-@endif
-
-
-
 @endsection
 @section('script')
-<script src="{{ asset('js/webcam.js')}}"></script>
-<script src="{{ asset('js/take_snapshot.js')}}"></script>
+<script src="{{ asset('new/assets/js/webcam.js')}}"></script>
+<script src="{{ asset('new/assets/js/take_snapshot.js')}}"></script>
 
 @endsection

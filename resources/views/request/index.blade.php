@@ -1,71 +1,111 @@
-@extends('layout.app')
-
-@section('style')
+@extends('layout.app',['title' => "الجنسيات",'subtitle'=>'قائمة الجنسيات'])
 
 
-@section('content')
-<div class="nav">
-    <div><h2>سجل الشهدات الصادره  </h2></div>
-    <a  href="{{url('/patient')}}" class="button button-red">رجوع <i class="fa fa-chevron-circle-left fa-1x" aria-hidden="true"></i></a>
 
-</div>
-<table>
-    <thead>
-        <td>#</td>
-        <td>تاريخ الاصدار</td>
-        <td>رقم الإصال</td>
-        <td></td>
-        <td></td>
-       
-    </thead>
-    <tbody>
-        @if (isset($request->request))
-        @foreach ($request->request()->orderBy('id', 'DESC')->get() as $key=> $patientRequest)
-            <tr>
-                <td>{{$key }}</td>
-                <td>{{$patientRequest->created_at->format('h:m / Y-m-d ') }}</td>
-                <td>{{$patientRequest->request_number }}</td>
-                <td>
-                    <a id="createModalOpen"  data-result="{{$patientRequest->results}}" href="#" >عرض نتيجة</a>
-                </td>
-                @if ($key==0)
-                <td>
-                    <a target="_blank"  href="{{url("/print/patient/$request->id/request/$patientRequest->id")}}" >طباعة</a>
-                </td>
-                @endif
-                
-            </tr>
-        @endforeach
-        @else
-        <tr>
-            <td colspan="3">لا يوجد سجل سابق</td>
-          
-        </tr>
-        @endif
-  
-    </tbody>
+@section('contenter')
+  <div class="row">
+    <div class="col-2 text-start">
+        {{-- <button
+        type="button"
+        class="btn btn-primary mb-3"
+        data-bs-toggle="modal"
+        data-bs-target="#modalCenter"
+        id="createModalOpen" data-action="create"
+        >
+        اضافة تحليل
+        </button> --}}
+        <a href="{{url('/patient')}}" class="btn btn-danger  mb-3">رجوع</a>
+      </div>
 
-</table>
-
-<div id="createModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>عرض النتيجة</h2>
-            <span class="close">&times;</span>
-        </div>
-        <div class="modal-body">
-            <table class="table-check-result" id="table-result">
-                
-                
-              </table>
-        </div>
     </div>
 
-</div>
+    <!-- Bootstrap modals -->
+    <div class="card">
+        {{-- <h5 class="card-header">Table Basic</h5> --}}
+        <div class="table-responsive text-nowrap">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>تاريخ الاصدار</th>
+                <th>رقم الإصال</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @if (isset($request->request))
+                    @foreach ($request->request()->orderBy('id', 'DESC')->get() as $key=> $patientRequest)
+                    <tr>
+                      <td>{{$key }}</td>
+                      <td>{{$patientRequest->created_at->format('h:m:s / Y-m-d ') }}</td>
+                      <td>{{$patientRequest->request_number }}</td>
+          
+                        <td>
+                            <a title="عرض نتيجة التحليل" data-bs-toggle="modal"data-bs-target="#modalCenter"id="createModalOpen" data-result="{{$patientRequest->results}}" href="#" >
+                              <i data-feather='eye'></i>
+
+                            </a>
+                        </td>
+                        <td>
+                          <a title="طباعة التحليل" target="_blank"  href="{{url("/print/patient/$request->id/request/$patientRequest->id")}}" >
+                            <i data-feather='printer'></i>
+                          </a>
+                      </td>
+
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="3">لا يوجد سجل سابق</td>
+
+                    </tr>
+                @endif
 
 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <div class="row gy-3">
+          <div class="col-lg-4 col-md-6">
+            <div class="mt-3">
+              <!-- Button trigger modal -->
+
+
+              <!-- Modal -->
+              <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                {{-- <form id="formNationality" action="{{url('/nationality')}}" method="post">
+                    @csrf --}}
+                    <input id="method" type="hidden" name="_method" value="PUT">
+
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="modalCenterTitle">نتيجة التحليل</h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table-check-result table table-bordered" id="table-result">
+
+
+                            </table>
+
+                        </div>
+                    </div>
+                    </div>
+                {{-- </form> --}}
+              </div>
+            </div>
+          </div>
+
+    </div>
+    <!--/ Bootstrap modals -->
 @endsection
 @section('script')
 <script>
@@ -86,12 +126,12 @@
             tr.appendChild(value)
             table.appendChild(tr)
         });
-        modal.style.display = 'block';
+        // modal.style.display = 'block';
 
 
     });
-    function getTestName(test_id) {  
-        var value;     
+    function getTestName(test_id) {
+        var value;
         tests.forEach(element => {
             // console.log(element.name_en,element.id==test_id);
             if (element.id==test_id) {
@@ -101,7 +141,7 @@
         return value;
     }
 
-   
+
 </script>
 
 @endsection

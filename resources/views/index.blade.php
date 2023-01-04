@@ -1,4 +1,4 @@
-@extends('new2.layout.app',['title' => "الشهادة الصحية",'subtitle'=>'اصدار'])
+@extends('layout.app',['title' => "الشهادة الصحية",'subtitle'=>'اصدار'])
 @section('style')
 <style>
   /* .input-style{
