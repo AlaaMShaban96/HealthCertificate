@@ -24,7 +24,7 @@ class BranchController extends Controller
        $branch->update($request->all());
        return redirect('branches/');
     }
-public function destroy(Branch $branch)
+    public function destroy(Branch $branch)
     {
         $branch->delete();
         return redirect('branches/');

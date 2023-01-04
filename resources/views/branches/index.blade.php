@@ -48,16 +48,14 @@
                               <table class="user-list-table table dataTable no-footer dtr-column" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                 <thead class="table-light">
                                     <tr role="row">
-                                      <th class="control sorting_disabled" rowspan="1" colspan="1" style="width: 138.017px;" aria-label="">رقم</th>
-                                      <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 138.017px;" aria-sort="descending" aria-label="Name: activate to sort column ascending">المستندات</th>
+                                      <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 138.017px;" aria-sort="descending" aria-label="Name: activate to sort column ascending">الفرع</th>
                                       <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 138.017px;" aria-label="Actions">العمالية</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                   @foreach ($branches as $key => $branche)
                                     <tr class="odd">
-                                      <td>{{ $key }}</td>
-                                      <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{$branche->name}}</td>
+                                      <td>{{$branche->name}}</td>
                                       <td>
                                         <div class="btn-group">
                                           <button class="btn btn-flat-info dropdown-toggle waves-effect" type="button" id="dropdownMenuButton300" data-bs-toggle="dropdown" aria-expanded="false">

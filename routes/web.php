@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\RequestController;
@@ -27,6 +28,8 @@ Route::resource('nationality', NationalityController::class);
 Route::resource('identityType', IdentityTypeController::class);
 Route::resource('patient', PatientController::class,['names' => 'patient']);
 Route::resource('branches', BranchController::class,['names' => 'branches']);
+Route::resource('users', UsersController::class,['names' => 'users']);
+
 Route::get('/request/{request}', [RequestController::class,'show']);
 Route::post('/request/{patient}', [RequestController::class,'store']);
 Route::put('/request/{patient}/update', [RequestController::class,'update']);

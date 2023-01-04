@@ -21,7 +21,7 @@ class IdentityTypesPatient extends Migration
             $table->foreign('request_id')->references('id')->on('requests')->onDelete('cascade');
             $table->bigInteger('identity_type_id')->unsigned();
             $table->foreign('identity_type_id')->references('id')->on('identity_types');
-            $table->string('identity',255);
+            $table->string('identity',20);
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,27 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $arr = explode('@', $this->route()->getActionName());
+        $method = $arr[1];  // The controller method
+        switch ($method) {
+            case 'store':
+                return [
+                    'name' => 'required',
+                    'email' => 'required',
+                    'phone' => 'required',
+                    'role' => 'required',
+                    'password' => 'required',
+                ];
+                break;
+                
+            case 'update':
+                return [
+                    'name' => 'required',
+                    'email' => 'required',
+                    'phone' => 'required',
+                    'role' => 'required',
+                ];
+                break;
+        }
     }
 }

@@ -15,7 +15,7 @@ class Patients extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name',50);
             $table->text('photo',255)->nullable();
             $table->string('gender',10);
             $table->date('birth_date');

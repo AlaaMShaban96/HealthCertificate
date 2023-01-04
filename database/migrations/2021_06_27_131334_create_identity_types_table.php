@@ -15,7 +15,7 @@ class CreateIdentityTypesTable extends Migration
     {
         Schema::create('identity_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name',15);
             $table->timestamps();
         });
     }

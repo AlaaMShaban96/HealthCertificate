@@ -19,7 +19,7 @@ class Results extends Migration
             $table->foreign('test_id')->references('id')->on('tests');
             $table->bigInteger('request_id')->unsigned();
             $table->foreign('request_id')->references('id')->on('requests')->onDelete('cascade');
-            $table->text('value',255);
+            $table->text('value',70);
 
             $table->timestamps();
         });

@@ -15,10 +15,10 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ar');
-            $table->string('name_en');
-            $table->string('positive',255)->nullable();
-            $table->string('negative',255)->nullable();
+            $table->string('name_ar',30);
+            $table->string('name_en',30);
+            $table->string('positive',70)->nullable();
+            $table->string('negative',70)->nullable();
             $table->timestamps();
         });
     }

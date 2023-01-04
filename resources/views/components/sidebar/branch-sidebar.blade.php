@@ -57,6 +57,12 @@
                         <span class="menu-item text-truncate" data-i18n="Analytics"> الفروع</span>
                     </a>                                                         
                 </li>
+                <li class="{{ (\Request::route()->getName() == 'users.index') ? 'active' : '' }}" >
+                    <a class="d-flex align-items-center" href="{{url('/users')}}">
+                        <i data-feather='circle'></i>
+                        <span class="menu-item text-truncate" data-i18n="Analytics"> مستخدمين</span>
+                    </a>                                                         
+                </li>
             </ul>
         </li>
 

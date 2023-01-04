@@ -1,4 +1,4 @@
-@extends('layout.app',['title' => $test->name_ar,'subtitle'=>$test->name_en])
+@extends('layout.app',['title' => $test->name_ar??'','subtitle'=>$test->name_en??''])
 @section('style')
 <style>
   .input-style{
@@ -10,7 +10,8 @@
   </style>
 @endsection
 @section('contenter')
-<form target="_blank" action="{{url('/unique')}}" method="POST" enctype="multipart/form-data">
+@if (isset($test))
+    <form target="_blank" action="{{url('/unique')}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('POST')
         {{-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">الشهادة الصحية/</span> اصدار</h4> --}}
@@ -19,7 +20,7 @@
         <div class="col-md-8">
             <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">بيانات شهادة الخلو من  {{$test->name_ar}}</h5>
+                <h5 class="mb-0">بيانات شهادة الخلو من  {{$test->name_ar??''}}</h5>
                 <small class="text-muted float-end">يرجآ التأكد من ادخال جميع الحقول</small>
             </div>
             <div class="card-body row">
@@ -119,17 +120,21 @@
                     {{-- @foreach ($tests as $test) --}}
                     <div class="form-check form-switch mb-2">
                         <input class="form-check-input" type="checkbox"name="tests[]" value="{{$test->id}}" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">{{$test->name_en}} | {{$test->name_ar}}</label>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">{{$test->name_en??''}} | {{$test->name_ar??''}}</label>
                     </div>
                     {{-- @endforeach --}}
 
 
                 </div>
-              </div>
+                </div>
             </div>
         </div>
 
-</form>
+    </form>   
+@else
+   <h1>تاكد من اختيار التحليل المنفرد </h1> 
+@endif
+
 @endsection
 @section('script')
 <script src="{{ asset('new/assets/js/webcam.js')}}"></script>
