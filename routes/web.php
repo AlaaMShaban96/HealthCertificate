@@ -28,6 +28,8 @@ Route::post('/login',[AuthController::class,'login'])->name('login');
 
 // create middleware for the dashboard route
 Route::group(['middleware' => ['auth']], function () {
+    // logout route
+    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
     Route::get('/',[DashboardController::class,'index'])->name('index');
     Route::get('/print/patient/{patient}/request/{request}',[DashboardController::class,'print']);
     Route::resource('nationality', NationalityController::class);

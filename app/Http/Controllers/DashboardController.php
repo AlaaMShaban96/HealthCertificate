@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $identityTypes=IdentityType::all();
         $nationalitys=Nationality::all();
         return view('index',compact('tests','identityTypes','nationalitys'));
-    }
+    } 
     public function unique()
     {
         $test= Test::where('unique',1)->first();

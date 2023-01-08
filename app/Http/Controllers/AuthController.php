@@ -17,7 +17,6 @@ class AuthController extends Controller
     //login function 
     public function login(Request $request)
     {
-        Alert::error('Error Title', 'Error Message');
        // validate the request...
          $request->validate([
               'email' => 'required|exists:users,email',
@@ -25,15 +24,17 @@ class AuthController extends Controller
          ]);
          // check if the user exist in the database and redirect to the dashboard
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                Alert::toast('تم تسجيل الدخول بنجاح ✌️', 'success')->position('top-end')->autoClose(5000);
                 return redirect()->to('/');
             }  
+            Alert::error('خطاء ', 'الرجاء التاكد من كلمة السر و الريد الالكتروني ');
+
             // if the user not exist in the database redirect to the login page with error message
             return Redirect::to("login")->withSuccess('Oppes! You have entered invalid credentials');
 
     }
     // logout function
     public function logout() {
-        Session::flush();
         Auth::logout();
         return Redirect('login');
     }
