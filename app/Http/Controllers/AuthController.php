@@ -19,7 +19,7 @@ class AuthController extends Controller
     {
        // validate the request...
          $request->validate([
-              'email' => 'required|exists:users,email',
+              'email' => 'required',
               'password' => 'required',
          ]);
          // check if the user exist in the database and redirect to the dashboard
