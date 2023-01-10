@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\CreateUsersLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -25,6 +26,7 @@ class AuthController extends Controller
          // check if the user exist in the database and redirect to the dashboard
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 Alert::toast('تم تسجيل الدخول بنجاح ✌️', 'success')->position('top-end')->autoClose(5000);
+                event( new CreateUsersLog(auth()->user(), 'login', 'تم تسجيل الدخول بنجاح'));
                 return redirect()->to('/');
             }  
             Alert::error('خطاء ', 'الرجاء التاكد من كلمة السر و الريد الالكتروني ');
@@ -35,6 +37,7 @@ class AuthController extends Controller
     }
     // logout function
     public function logout() {
+        event( new CreateUsersLog(auth()->user(), 'logout', 'تم تسجيل الخروج بنجاح'));
         Auth::logout();
         return Redirect('login');
     }

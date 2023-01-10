@@ -130,7 +130,7 @@
 
      <!-- BEGIN: Vendor JS-->
      <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
-     <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>
+     {{-- <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script> --}}
      <script src="{{ asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
       {{-- <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script> --}}
      <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
@@ -142,7 +142,7 @@
      <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
      <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
 
-     <script src="{{ asset('app-assets/js/scripts/cards/card-analytics.js') }}"></script>
+     {{-- <script src="{{ asset('app-assets/js/scripts/cards/card-analytics.js') }}"></script> --}}
  
     
      <script src="{{ asset('app-assets/js/scripts/charts/chart-chartjs.js') }}"></script>

@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             case 'store':
                 return [
                     'name' => 'required',
-                    'email' => 'required',
+                    'email' => 'required|unique:users,email',
                     'phone' => 'required',
                     'role' => 'required',
                     'password' => 'required',
@@ -39,7 +39,7 @@ class UserRequest extends FormRequest
             case 'update':
                 return [
                     'name' => 'required',
-                    'email' => 'required',
+                    'email' => 'required|exists:users,email',
                     'phone' => 'required',
                     'role' => 'required',
                 ];

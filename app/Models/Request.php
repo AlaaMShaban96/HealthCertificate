@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Branch;
 use App\Models\Result;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Request extends Model
 {
     protected $table='requests';
-    protected $fillable = ['patient_id','request_number','requesting_authority','unique','branch_id'];
+    protected $fillable = ['patient_id','request_number','requesting_authority','unique','branch_id','user_id'];
     use HasFactory;
     /**
      * Get the patient that owns the Request
@@ -33,6 +34,10 @@ class Request extends Model
     public function branch()
     {
         return $this->belongsTo(Branch::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 

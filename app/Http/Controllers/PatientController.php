@@ -9,6 +9,7 @@ use App\Models\Patient;
 use App\Models\Nationality;
 use App\Models\IdentityType;
 use Illuminate\Http\Request;
+use App\Events\CreateUsersLog;
 use App\Services\RequestService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -38,10 +39,11 @@ class PatientController extends Controller
             DB::transaction(function () use($request) {
                 $request['age']=Carbon::parse($request->birth_date)->age;
                 $request['branch_id']=auth()->user()->branch_id;
+                $request['user_id']=auth()->user()->id;
                 $patient=Patient::create($request->all());
                 $patientRequest=  RequestService::CreateRequest($request,$patient);
-                Alert::toast('تمت عملية الاضافة بنجاح', 'success')->position('top-center')->autoClose(5000);
-            
+                Alert::toast('تم التسجيل بنجاح', 'success')->position('top-end')->autoClose(5000);
+                event( new CreateUsersLog(auth()->user(), 'store', 'تم الاضافة  مريض('.$patient->name.')'));            
                 
             });
 
@@ -67,13 +69,15 @@ class PatientController extends Controller
             $request['photo']=$patient->photo;
         }
         $patient->update($request->all());
-        Session::flash('message', 'تمت التعديل بنجاح');
+        Alert::toast('تم التعديل بنجاح', 'success')->position('top-end')->autoClose(5000);
+        event( new CreateUsersLog(auth()->user(), 'update', 'تم التعديل مريض ('.$patient->name.')'));
         return redirect('/patient');
     }
     public function destroy(Patient $patient)
     {
+        event( new CreateUsersLog(auth()->user(), 'destroy', 'تمت الحدف مريض ('.$patient->name.')'));
         $patient->delete();
-        Session::flash('message', 'تمت الحدف بنجاح');
+        Alert::toast('تم الحدف بنجاح', 'success')->position('top-end')->autoClose(5000);
         return redirect('/patient');
 
     }

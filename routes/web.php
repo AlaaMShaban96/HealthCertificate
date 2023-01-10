@@ -40,8 +40,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('patient', PatientController::class,['names' => 'patient']);
     //branch routes
     Route::get('/branches/{branch}/profile',[BranchController::class,'profile'])->name('branches.profile');
-
     Route::resource('branches', BranchController::class,['names' => 'branches']);
+    //user routes
+    Route::get('/users/{user}/profile',[UsersController::class,'profile'])->name('users.profile');
     Route::resource('users', UsersController::class,['names' => 'users']);
     
     Route::get('/request/{request}', [RequestController::class,'show']);

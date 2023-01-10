@@ -24,6 +24,8 @@ class Patients extends Migration
             $table->foreign('nationality_id')->references('id')->on('nationalities');
             $table->bigInteger('branch_id')->unsigned();
             $table->foreign('branch_id')->references('id')->on('branches');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

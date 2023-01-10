@@ -2,22 +2,23 @@
 
 namespace App\View\Components\Shared\User;
 
-use App\Models\Branch;
 use Illuminate\View\Component;
 
-class UserList extends Component
+class Logger extends Component
 {
-    public $users,$branches ;
+    public $user,$logs;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($users,Branch $branchRepo)
+    public function __construct($user)
     {
-        $this->users = $users;
-        $this->branches  = $branchRepo->pluck('name','id');
+        $this->user = $user;
+        $this->logs = $user->logs()->orderBy('created_at', 'DESC')->paginate(5);
+        // dd($user->logs);
     }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -25,6 +26,6 @@ class UserList extends Component
      */
     public function render()
     {
-        return view('components.shared.user.user-list');
+        return view('components.shared.user.logger');
     }
 }

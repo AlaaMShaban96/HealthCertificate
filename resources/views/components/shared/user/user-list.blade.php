@@ -38,6 +38,8 @@
               </button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton300">
+                    <a class="dropdown-item " href="{{ route('users.profile',$user->id) }}"><i data-feather='mouse-pointer'></i> ملف المستخدم </a>
+
                       <a class="dropdown-item" id="createModalOpen" data-action="edit" data-bs-toggle="modal" data-bs-target="#modalCenter"
                        data-name="{{$user->name}}" 
                        data-role="{{$user->role}}" 
@@ -71,14 +73,14 @@
 
         <!-- Modal -->
         <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-          <form id="formIdentityType" action="{{url('/branches')}}" method="post">
+          <form id="formIdentityType" action="{{url('/users')}}" method="post">
               @csrf
               <input id="method" type="hidden" name="_method" value="PUT">
 
               <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                   <div class="modal-header">
-                  <h5 class="modal-title" id="modalCenterTitle">الفرع</h5>
+                  <h5 class="modal-title" id="modalCenterTitle">المستخدم</h5>
                   <button
                       type="button"
                       class="btn-close"
@@ -96,12 +98,13 @@
                               id="name"
                               class="form-control"
                               placeholder="اسم المستخدم "
+                              required
                           />
                       </div>
                       <div class="col-md-6 mb-1" data-select2-id="148">
                           <label class="form-label" for="select2-basic">الفرع</label>
                           <div class="position-relative" data-select2-id="147">
-                              <select class="select2 form-select select2-hidden-accessible" name="branch_id" id="branch_id" data-select2-id="select2-basic" tabindex="-1" aria-hidden="true">
+                              <select class="select2 form-select select2-hidden-accessible" required name="branch_id" id="branch_id" data-select2-id="select2-basic" tabindex="-1" aria-hidden="true">
                               <option value="" data-select2-id="2">مدير نظام</option>
                                   @foreach ($branches as $key => $name)
                                       <option value="{{ $key }}" data-select2-id="2">{{ $name }}</option>
@@ -113,19 +116,19 @@
                       <div class="col-xl-6 col-md-6 col-12">
                           <div class="mb-1">
                               <label class="form-label" for="basicInput">رقم الهاتف</label>
-                              <input type="number" class="form-control" name="phone" id="phone" placeholder="ادخال الرقم من دون 0 ">
+                              <input type="number" class="form-control"  required name="phone" id="phone" placeholder="ادخال الرقم من دون 0 ">
                           </div>
                       </div>
                       <div class="col-xl-6 col-md-6 col-12">
                           <div class="mb-1">
                               <label class="form-label" for="basicInput">البريد الالكتروني</label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="البريدالالكتروني">
+                              <input type="email" class="form-control" required name="email" id="email" placeholder="البريدالالكتروني">
                           </div>
                       </div>
                       <div class="col-xl-12 col-md-6 col-12">
                           <div class="mb-1">
                               <label class="form-label" for="basicInput">كلمة المرور</label>
-                              <input type="password" class="form-control" name="password"  id="password" placeholder="كلمة السر ">
+                              <input type="password" class="form-control" required name="password"  id="password" placeholder="كلمة السر ">
                           </div>
                       </div>
                       <div class="col-12">
@@ -136,7 +139,7 @@
                               <div class="card-body">
                                   <div class="demo-inline-spacing">
                                       <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="role" id="employe" value="employe" checked="">
+                                          <input class="form-check-input"  type="radio" name="role" id="employe" value="employe" checked="">
                                           <label class="form-check-label" for="inlineRadio1">موضف</label>
                                       </div>
                                       <div class="form-check form-check-inline">
@@ -172,6 +175,8 @@
     </div>
 
 </div>
+{{-- <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script> --}}
+
 <script>
   var modal = document.getElementById('createModal');
   $(document).on("click", "#createModalOpen", function () {

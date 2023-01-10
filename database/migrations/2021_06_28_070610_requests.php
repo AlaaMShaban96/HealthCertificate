@@ -20,6 +20,8 @@ class Requests extends Migration
             $table->foreign('branch_id')->references('id')->on('branches');
             $table->string('requesting_authority',50);
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Nationality;
 use Illuminate\Http\Request;
+use App\Events\CreateUsersLog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\NationalityRequest;
 
 class NationalityController extends Controller
@@ -20,24 +22,31 @@ class NationalityController extends Controller
         return view('nationality.edit',compact('nationality'));
 
     }
-    public function update(NationalityRequest $request , Nationality $nationality)
-    {
-       $nationality->update($request->all());
-       return redirect('nationality/');
-    }
     public function store(NationalityRequest $request)
     {
-        Nationality::create($request->all());
-        Session::flash('message', 'تمت حدف البيانات بنجاح');
-
+        $nationality=Nationality::create($request->all());
+        Alert::toast('تم التسجيل بنجاح', 'success')->position('top-end')->autoClose(5000);
+        event( new CreateUsersLog(auth()->user(), 'store', 'تم الاضافة الجنسية ('.$nationality->name.')'));
         return redirect('nationality/');
 
     }
+    public function update(NationalityRequest $request , Nationality $nationality)
+    {
+       $nationality->update($request->all());
+       Alert::toast('تم التعديل بنجاح', 'success')->position('top-end')->autoClose(5000);
+       event( new CreateUsersLog(auth()->user(), 'update', 'تم التعديل الجنسية ('.$nationality->name.')'));
+       return redirect('nationality/');
+    }
+
     public function destroy(Nationality $nationality)
     {
         try {
             DB::beginTransaction();
+            event( new CreateUsersLog(auth()->user(), 'destroy', 'تمت الحدف الجنسية ('.$nationality->name.')'));
+
             $nationality->delete();
+            Alert::toast('تم الحدف بنجاح', 'success')->position('top-end')->autoClose(5000);
+
             DB::commit();
             Session::flash('message', 'تمت حدف البيانات بنجاح');
 

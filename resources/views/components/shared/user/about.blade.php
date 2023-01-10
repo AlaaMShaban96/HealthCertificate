@@ -1,6 +1,5 @@
 <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
-     <!-- /User Card -->
-     <div class="card border-primary">
+    <div class="card border-primary">
         
         <div class="card-header">
             <h4 class="card-title">إحصائيات اليوم </h4>
@@ -19,7 +18,7 @@
                             </div>
                         </div>
                         <h2 class="fw-bolder">{{ $numberRequestToday }}</h2>
-                        <p class="card-text">الشهادات</p>
+                        <p class="card-text">الشهادات الصحية</p>
                     </div>
                 </div>
             </div>
@@ -46,13 +45,27 @@
                 <div class="d-flex align-items-center flex-column">
                     <div class="avatar bg-light-danger avatar-xl">
                         <span class="avatar-content">
-                            {{mb_substr($branch->name, 0, 2)  }}
+                            {{mb_substr($user->name, 0, 2)  }}
                         </span>
-                    </div>
-                    {{-- <img class="img-fluid rounded mt-3 mb-2" src="../../../app-assets/images/portrait/small/avatar-s-2.jpg" alt="User avatar" width="110" height="110"> --}}
+                    </div>   
                     <div class="user-info text-center">
-                        <h4>{{ $branch->name }}</h4>
-                        <span class="badge bg-light-secondary">Author</span>
+                        <h4>{{ $user->name }}</h4>
+                        @switch($user->role)
+                            @case("employe")
+                                <span class="badge rounded-pill badge-glow bg-primary">موضف</span>  
+                                @break
+                            @case("monitor")
+                                <span class="badge rounded-pill badge-glow bg-warning">مراقب</span>  
+                                @break
+                            @case("admin")
+                                <span class="badge rounded-pill badge-glow bg-info">مدير  علي الفرع </span> 
+                                @break
+                            @case("super-admin")
+                                <span class="badge rounded-pill badge-glow bg-danger">مدير  علي النظام </span>
+                                @break
+                            @default
+                                
+                        @endswitch
                     </div>
                 </div>
             </div>
@@ -62,8 +75,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check font-medium-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     </span>
                     <div class="ms-75">
-                        <h4 class="mb-0">{{ $branch->patients->count() }}</h4>
-                        <small>عدد المرضي</small>
+                        <h4 class="mb-0">{{ $numberPatientTotel }}</h4>
+                        <small>عدد المرضي </small>
                     </div>
                 </div>
                 <div class="d-flex align-items-start">
@@ -71,13 +84,54 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase font-medium-2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                     </span>
                     <div class="ms-75">
-                        <h4 class="mb-0">{{ $branch->requests->count() }}</h4>
-                        <small>عدد طلبات استخراج الشهادة</small>
+                        <h4 class="mb-0">{{$numberRequestTotel  }}</h4>
+                        <small>الشهادات الصحية</small>
                     </div>
                 </div>
             </div>
-            
+            <h4 class="fw-bolder border-bottom pb-50 mb-1">المعلومات</h4>
+            <div class="info-container">
+                <ul class="list-unstyled">
+                    <li class="mb-75">
+                        <span class="fw-bolder me-25">الاسم:</span>
+                        <span>{{ $user->name }}</span>
+                    </li>
+                    <li class="mb-75">
+                        <span class="fw-bolder me-25">البريد الإلكتروني:</span>
+                        <span>{{ $user->email??"لا يوجد بريد الكتروني" }}</span>
+                    </li>
+                    <li class="mb-75">
+                        <span class="fw-bolder me-25">رقم العاتف :</span>
+                        <span>{{ $user->phone??"لا يوجد رقم العاتف  " }}</span>
+
+                    </li>
+                    <li class="mb-75">
+                        <span class="fw-bolder me-25">الفرع :</span>
+                        <span>{{$user->role=='super-admin'? "من غير فرع " : $user->branch->name }}</span>
+                    </li>
+
+                    <li class="mb-75">
+                        <span class="fw-bolder me-25">الصلاحيات:</span>
+                        @switch($user->role)
+                            @case("employe")
+                                <span class="badge rounded-pill badge-glow bg-primary">موضف</span>  
+                                @break
+                            @case("monitor")
+                                <span class="badge rounded-pill badge-glow bg-warning">مراقب</span>  
+                                @break
+                            @case("admin")
+                                <span class="badge rounded-pill badge-glow bg-info">مدير  علي الفرع </span> 
+                                @break
+                            @case("super-admin")
+                                <span class="badge rounded-pill badge-glow bg-danger">مدير  علي النظام </span>
+                                @break
+                            @default
+                                
+                        @endswitch
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-   
+
 </div>

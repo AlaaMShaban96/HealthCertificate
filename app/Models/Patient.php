@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\IdentityType;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ class Patient extends Model
     use Filterable;
     protected $table='patients';
     protected $appends = ['identity','IdentityTypeId','RequestingAuthority','RequestNumber'];
-    protected $fillable = ['name','photo','gender','birth_date','age','nationality_id','branch_id'];
+    protected $fillable = ['name','photo','gender','birth_date','age','nationality_id','branch_id','user_id'];
     use HasFactory;
     /**
      * Get the Nationality that owns the Patient
@@ -69,5 +70,9 @@ class Patient extends Model
     public function result()
     {
         return $this->hasMany(Result::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

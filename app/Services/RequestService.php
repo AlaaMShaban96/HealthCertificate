@@ -24,6 +24,7 @@ class RequestService
             $patientRequest= PatientRequest::create([
                 'patient_id'=>$patient->id,
                 'branch_id'=>$request->branch_id,
+                'user_id'=>$request->user_id,
                 'request_number'=>$request->request_number,
                 'requesting_authority'=>$request->requesting_authority
             ]);
@@ -36,13 +37,13 @@ class RequestService
                  Result::updateOrCreate([
                 'request_id'=>$patientRequest->id,
                 'test_id'=>$test->id],
-                ['value'=>$test->positive]
+                ['value'=>$test->positive,'user_id'=>$request->user_id]
             );
             }else {
                  Result::updateOrCreate([
                 'request_id'=>$patientRequest->id,
                 'test_id'=>$test->id],
-                ['value'=>$test->negative]
+                ['value'=>$test->negative,'user_id'=>$request->user_id]
             );
             }
 
@@ -52,7 +53,7 @@ class RequestService
                     Result::updateOrCreate([
                         'request_id'=>$patientRequest->id,
                         'test_id'=>$test_id],
-                        ['value'=>Test::find($test_id)->first()->positive]
+                        ['value'=>Test::find($test_id)->first()->positive,'user_id'=>$request->user_id]
                     );
                 }
             }
@@ -61,7 +62,7 @@ class RequestService
                     'request_id'=>$patientRequest->id,
                     'test_id'=>$test->id
                     ],
-                    ['value'=>$test->negative]
+                    ['value'=>$test->negative,'user_id'=>$request->user_id]
                 );
             }
         }
