@@ -402,9 +402,9 @@ $(window).on('load', function () {
                 display: true
               },
               ticks: {
-                stepSize: 100,
+                stepSize: 5,
                 min: 0,
-                max: 400,
+                max: max +5,
                 fontColor: labelColor
               },
               gridLines: {
@@ -426,66 +426,8 @@ $(window).on('load', function () {
         }
       },
       data: {
-        labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140],
-        datasets: [
-          {
-            data: [80, 150, 180, 270, 210, 160, 160, 202, 265, 210, 270, 255, 290, 360, 375],
-            label: 'Europe',
-            borderColor: lineChartDanger,
-            lineTension: 0.5,
-            pointStyle: 'circle',
-            backgroundColor: lineChartDanger,
-            fill: false,
-            pointRadius: 1,
-            pointHoverRadius: 5,
-            pointHoverBorderWidth: 5,
-            pointBorderColor: 'transparent',
-            pointHoverBorderColor: window.colors.solid.white,
-            pointHoverBackgroundColor: lineChartDanger,
-            pointShadowOffsetX: 1,
-            pointShadowOffsetY: 1,
-            pointShadowBlur: 5,
-            pointShadowColor: tooltipShadow
-          },
-          {
-            data: [80, 125, 105, 130, 215, 195, 140, 160, 230, 300, 220, 170, 210, 200, 280],
-            label: 'Asia',
-            borderColor: lineChartPrimary,
-            lineTension: 0.5,
-            pointStyle: 'circle',
-            backgroundColor: lineChartPrimary,
-            fill: false,
-            pointRadius: 1,
-            pointHoverRadius: 5,
-            pointHoverBorderWidth: 5,
-            pointBorderColor: 'transparent',
-            pointHoverBorderColor: window.colors.solid.white,
-            pointHoverBackgroundColor: lineChartPrimary,
-            pointShadowOffsetX: 1,
-            pointShadowOffsetY: 1,
-            pointShadowBlur: 5,
-            pointShadowColor: tooltipShadow
-          },
-          {
-            data: [80, 99, 82, 90, 115, 115, 74, 75, 130, 155, 125, 90, 140, 130, 180],
-            label: 'Africa',
-            borderColor: warningColorShade,
-            lineTension: 0.5,
-            pointStyle: 'circle',
-            backgroundColor: warningColorShade,
-            fill: false,
-            pointRadius: 1,
-            pointHoverRadius: 5,
-            pointHoverBorderWidth: 5,
-            pointBorderColor: 'transparent',
-            pointHoverBorderColor: window.colors.solid.white,
-            pointHoverBackgroundColor: warningColorShade,
-            pointShadowOffsetX: 1,
-            pointShadowOffsetY: 1,
-            pointShadowBlur: 5,
-            pointShadowColor: tooltipShadow
-          }
-        ]
+        labels: months,
+        datasets: datasetsTable
       }
     });
   }

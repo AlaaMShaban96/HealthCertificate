@@ -12,7 +12,7 @@ class Patient extends Model
     use Filterable;
     protected $table='patients';
     protected $appends = ['identity','IdentityTypeId','RequestingAuthority','RequestNumber'];
-    protected $fillable = ['name','photo','gender','birth_date','age','nationality_id'];
+    protected $fillable = ['name','photo','gender','birth_date','age','nationality_id','branch_id'];
     use HasFactory;
     /**
      * Get the Nationality that owns the Patient

@@ -29,6 +29,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/toastr.min.css') }}">
   <!-- END: Vendor CSS-->
 
+
   <!-- BEGIN: Theme CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/bootstrap.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/bootstrap-extended.css') }}">
@@ -45,6 +46,9 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/plugins/extensions/ext-component-toastr.css') }}">
   <!-- END: Page CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
+
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/plugins/forms/pickers/form-flat-pickr.css') }}">
 
   <!-- BEGIN: Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css-rtl/custom-rtl.css') }}">
@@ -126,14 +130,23 @@
 
      <!-- BEGIN: Vendor JS-->
      <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
+     <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>
      <script src="{{ asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
       {{-- <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script> --}}
      <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
      <script src="{{ asset('/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') }}"></script>
 
+     <script src="{{ asset('app-assets/vendors/js/charts/chart.min.js') }}"></script>
+     <script src="{{ asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
      {{-- <script src="../../../app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script> --}}
      <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
      <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
+
+     <script src="{{ asset('app-assets/js/scripts/cards/card-analytics.js') }}"></script>
+ 
+    
+     <script src="{{ asset('app-assets/js/scripts/charts/chart-chartjs.js') }}"></script>
+ 
      @include('sweetalert::alert')
 
       {{-- <script src="{{ asset('app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script> --}}
@@ -157,22 +170,6 @@
         $('.delete').on('click', function(e) {
                e.preventDefault();
                var form = $('#deleteForm'+$(this).data('id'));
-              // new swal({
-              //      title: "هل أنت متأكد؟",
-              //      text: "سيتم حذف السجل بشكل دائم",
-              //      icon: "warning",
-              //      buttons: [
-              //          'الغاء',
-              //          'حذف'
-              //      ],
-              //      dangerMode: true,
-              //  }).then(function(isConfirm) {
-              //      if (isConfirm) {
-              //          form.submit();
-              //      }
-              //  });
-
-
                Swal.fire({
                       title: "هل أنت متأكد؟",
                       text: "سيتم حذف السجل بشكل دائم",

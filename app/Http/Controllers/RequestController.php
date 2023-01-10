@@ -17,7 +17,8 @@ class RequestController extends Controller
    }
   public function store(Request $request,Patient $patient)
    {
-     $patientRequest= RequestService::createRequest( $request,$patient,false,'create');
+      $request['branch_id']=auth()->user()->branch_id;
+      $patientRequest= RequestService::createRequest( $request,$patient,false,'create');
 
    //   return RequestService::printResult( $patientRequest,$patient);
       Session::flash('message', 'تمت الاضافة بنجاح');

@@ -29,4 +29,9 @@ class BranchController extends Controller
         $branch->delete();
         return redirect('branches/');
     }
+    public function profile(Request $request ,Branch $branch)
+    {
+        $security=$request->security??false;
+        return view('branches.profile',compact('branch','security'));
+    }
 }

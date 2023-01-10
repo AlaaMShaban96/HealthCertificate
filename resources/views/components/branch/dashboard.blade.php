@@ -14,19 +14,19 @@
             <div class="card-body row">
                 <div class="mb-3 col-md-12">
                     <label class="form-label-lg" for="basic-default-fullname">الاسم</label>
-                    <input required tabindex='1' name='name' type="text" class="form-control" id="basic-default-fullname" placeholder="الاسم التلاتي">
+                    <input required tabindex='1' value="{{ old('name') }}" name='name' type="text" class="form-control" id="basic-default-fullname" placeholder="الاسم التلاتي">
                 </div>
                 <div class="mb-3 col-md-12">
                     <label class="form-label-lg" for="basic-default-company">رقم اﻹصال</label>
-                    <input tabindex='1' name='request_number' type="number" class="form-control" id="basic-default-company" placeholder="رقم اﻹصال">
+                    <input tabindex='1' value="{{ old('request_number') }}" name='request_number' type="number" class="form-control" id="basic-default-company" placeholder="رقم اﻹصال">
                 </div>
                 <div class="mb-3 col-md-6">
                     <label class="form-label-lg" for="basic-default-fullname">تاريخ الميلاد</label>
-                        <input required tabindex='3' name='birth_date'   class="form-control" type="date" value="2021-06-18" id="html5-date-input">
+                        <input required tabindex='3' value="{{ old('birth_date') }}" name='birth_date'   class="form-control" type="date" value="2021-06-18" id="html5-date-input">
                 </div>
                 <div class="mb-3 col-md-6">
                     <label for="exampleFormControlSelect1" class="form-label-lg">الجنسية</label>
-                    <select required name="nationality_id"   class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                    <select required name="nationality_id" value="{{ old('nationality_id') }}"  class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                         @foreach ($nationalitys as $nationality)
                         <option value="{{$nationality->id}}">{{$nationality->name}}</option>
                         @endforeach
@@ -34,23 +34,23 @@
                 </div>
                 <div class="mb-3 col-md-6">
                     <label class="form-label-lg" for="basic-default-company">الجيهة الطالبة للشهادة</label>
-                    <input required tabindex='4' name='requesting_authority' type="text" class="form-control" id="basic-default-company" placeholder="الجيهة الطالبة للشهادة">
+                    <input required tabindex='4' value="{{ old('requesting_authority') }}" name='requesting_authority' type="text" class="form-control" id="basic-default-company" placeholder="الجيهة الطالبة للشهادة">
                 </div>
                 <div class="mb-3 col-md-6">
                     <label for="exampleFormControlSelect1" class="form-label-lg">الجنس</label>
-                    <select required  name="gender" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                    <select required value="{{ old('gender') }}" name="gender" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                         <option value="ذكر">ذكر</option>
                         <option value="انثي">انثي</option>
                     </select>
                 </div>
                 <div class="mb-3 col-md-6">
                     <label class="form-label-lg" for="basic-default-company">رقم الهوية</label>
-                    <input required tabindex='5' name="identityType_number"  type="text" class="form-control" id="basic-default-company" placeholder="رقم اﻹصال">
+                    <input required tabindex='5' value="{{ old('identityType_number') }}" name="identityType_number"  type="text" class="form-control" id="basic-default-company" placeholder="رقم اﻹصال">
                 </div>
 
                 <div class="mb-3 col-md-6">
                     <label for="exampleFormControlSelect1" class="form-label-lg">توع الهوية</label>
-                    <select required  name=' identity_type_id'class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                    <select required  value="{{ old('identity_type_id') }}" name=' identity_type_id'class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                         @foreach ($identityTypes as $identityType)
                         <option value="{{$identityType->id}}">{{$identityType->name}}</option>
                         @endforeach

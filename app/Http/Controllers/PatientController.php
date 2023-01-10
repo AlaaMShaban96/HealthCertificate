@@ -10,8 +10,10 @@ use App\Models\Nationality;
 use App\Models\IdentityType;
 use Illuminate\Http\Request;
 use App\Services\RequestService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Request as PatientRequest;
 
 class PatientController extends Controller
@@ -32,13 +34,24 @@ class PatientController extends Controller
     }
     public function store(Request $request)
     {
-        $request['age']=Carbon::parse($request->birth_date)->age;
+        try {
+            DB::transaction(function () use($request) {
+                $request['age']=Carbon::parse($request->birth_date)->age;
+                $request['branch_id']=auth()->user()->branch_id;
+                $patient=Patient::create($request->all());
+                $patientRequest=  RequestService::CreateRequest($request,$patient);
+                Alert::toast('تمت عملية الاضافة بنجاح', 'success')->position('top-center')->autoClose(5000);
+            
+                
+            });
 
-        $patient=Patient::create($request->all());
-
-        $patientRequest=  RequestService::CreateRequest($request,$patient);
-        Session::flash('message', 'تمت الإضافة بنجاح');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Alert::toast('هناك مشكلة في عملية التسجيل ', 'error')->position('top-center')->autoClose(5000);
+            return redirect()->back()->withInput();
+        }
         return redirect('/');
+
     }
     public function update(Request $request,Patient $patient)
     {

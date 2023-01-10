@@ -57,22 +57,23 @@
                                     <tr class="odd">
                                       <td>{{$branche->name}}</td>
                                       <td>
-                                        <div class="btn-group">
-                                          <button class="btn btn-flat-info dropdown-toggle waves-effect" type="button" id="dropdownMenuButton300" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i data-feather='grid'></i>
-                                          </button>
-                  
-                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton300">
-                                                  <a class="dropdown-item" id="createModalOpen" data-action="edit" data-bs-toggle="modal" data-bs-target="#modalCenter" data-name="{{$branche->name}}" data-id="{{$branche->id}}" href="javascript:void(0);"><i data-feather='edit-3'></i> تعديل</a>
-                                                  <a class="dropdown-item delete" data-id="{{$branche->id}}" href="#"><i data-feather='delete'></i> حدف</a>
-                                              </div>
-                                        </div>
-                                            <form id="deleteForm{{ $branche->id }}" action="{{url('/branches/'.$branche->id)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                            
-                                            </form>
-                                        </td>
+                                          <div class="btn-group">
+                                            <button class="btn btn-flat-info dropdown-toggle waves-effect" type="button" id="dropdownMenuButton300" data-bs-toggle="dropdown" aria-expanded="false">
+                                              <i data-feather='grid'></i>
+                                            </button>
+                    
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton300">
+                                                    <a class="dropdown-item " href="{{ route('branches.profile',$branche->id) }}"><i data-feather='mouse-pointer'></i> ملف الفرع </a>
+                                                    <a class="dropdown-item" id="createModalOpen" data-action="edit" data-bs-toggle="modal" data-bs-target="#modalCenter" data-name="{{$branche->name}}" data-id="{{$branche->id}}" href="javascript:void(0);"><i data-feather='edit-3'></i> تعديل</a>
+                                                    <a class="dropdown-item delete" data-id="{{$branche->id}}" href="#"><i data-feather='delete'></i> حدف</a>
+                                                </div>
+                                          </div>
+                                          <form id="deleteForm{{ $branche->id }}" action="{{url('/branches/'.$branche->id)}}" method="post">
+                                              @csrf
+                                              @method('DELETE')
+                                          
+                                          </form>
+                                      </td>
                   
                                       </tr>
                                   @endforeach

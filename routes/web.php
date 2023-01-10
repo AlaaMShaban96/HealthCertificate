@@ -1,6 +1,8 @@
  <?php
 
 
+use App\Models\Branch;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
@@ -22,6 +24,7 @@ use App\Http\Controllers\IdentityTypeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 // login route 
 Route::get('/login',[AuthController::class,'loginView'])->name('login_view');
 Route::post('/login',[AuthController::class,'login'])->name('login');
@@ -35,6 +38,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('nationality', NationalityController::class);
     Route::resource('identityType', IdentityTypeController::class);
     Route::resource('patient', PatientController::class,['names' => 'patient']);
+    //branch routes
+    Route::get('/branches/{branch}/profile',[BranchController::class,'profile'])->name('branches.profile');
+
     Route::resource('branches', BranchController::class,['names' => 'branches']);
     Route::resource('users', UsersController::class,['names' => 'users']);
     
