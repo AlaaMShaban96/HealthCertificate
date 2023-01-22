@@ -50,7 +50,7 @@ class UsersController extends Controller
     }
     public function profile(Request $request ,User $user)
     {
-        $security=$request->security??false;
-        return view('users.profile',compact('user','security'));
+        $section=$request->section??'logger';
+        return view('users.profile',compact('user','section'));
     }
 }

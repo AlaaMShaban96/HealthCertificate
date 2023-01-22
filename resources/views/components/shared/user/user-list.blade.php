@@ -177,41 +177,44 @@
 </div>
 {{-- <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script> --}}
 
+
+@section('script')
 <script>
-  var modal = document.getElementById('createModal');
-  $(document).on("click", "#createModalOpen", function () {
-      var action= document.getElementById('formIdentityType').action;
-      let url = window.location.href.split('#')[0];
-      document.getElementById('formIdentityType').action=url;
-
-      switch ($(this).data('action')) {
-          case 'edit':
-              document.getElementById('name').value=$(this).data().name;
-              document.getElementById($(this).data().role).checked=true;
-              document.getElementById('branch_id').value=$(this).data().branch_id;
-              document.getElementById('phone').value=$(this).data().phone;
-              document.getElementById('email').value=$(this).data().email;
-
-              document.getElementById('formIdentityType').action=url+'/'+$(this).data('id');
-              document.getElementById('method').value='PUT';
-              document.getElementById('button').style.backgroundColor="#159EC8";
-
-              break;
-          case 'create':
-              document.getElementById('method').value='';
-              document.getElementById('nameField').value="";
-              document.getElementById('button').style.backgroundColor="#16D090";
-
-              break;
-
-          default:
-              break;
-      }
-
-      modal.style.display = 'block';
-
-
-  });
-
-
-</script>
+    var modal = document.getElementById('createModal');
+    $(document).on("click", "#createModalOpen", function () {
+        var action= document.getElementById('formIdentityType').action;
+        let url = window.location.href.split('#')[0];
+        document.getElementById('formIdentityType').action=url;
+  
+        switch ($(this).data('action')) {
+            case 'edit':
+                document.getElementById('name').value=$(this).data().name;
+                document.getElementById($(this).data().role).checked=true;
+                document.getElementById('branch_id').value=$(this).data().branch_id;
+                document.getElementById('phone').value=$(this).data().phone;
+                document.getElementById('email').value=$(this).data().email;
+  
+                document.getElementById('formIdentityType').action=url+'/'+$(this).data('id');
+                document.getElementById('method').value='PUT';
+                document.getElementById('button').style.backgroundColor="#159EC8";
+  
+                break;
+            case 'create':
+                document.getElementById('method').value='';
+                document.getElementById('nameField').value="";
+                document.getElementById('button').style.backgroundColor="#16D090";
+  
+                break;
+  
+            default:
+                break;
+        }
+  
+        modal.style.display = 'block';
+  
+  
+    });
+  
+  
+  </script>
+@endsection
