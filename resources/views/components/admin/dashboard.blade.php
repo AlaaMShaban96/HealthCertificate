@@ -20,7 +20,7 @@
                         </div>
                         <div class="card-body statistics-body">
                             <div class="row">
-                                <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                <div class="col-xl-4 col-sm-6 col-12 mb-2 mb-xl-0">
                                     <div class="d-flex flex-row">
                                         <div class="avatar bg-light-primary me-2">
                                             <div class="avatar-content">
@@ -33,7 +33,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                <div class="col-xl-4 col-sm-6 col-12 mb-2 mb-xl-0">
                                     <div class="d-flex flex-row">
                                         <div class="avatar bg-light-info me-2">
                                             <div class="avatar-content">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
+                                <div class="col-xl-4 col-sm-6 col-12 mb-2 mb-sm-0">
                                     <div class="d-flex flex-row">
                                         <div class="avatar bg-light-danger me-2">
                                             <div class="avatar-content">
@@ -56,19 +56,6 @@
                                         <div class="my-auto">
                                             <h4 class="fw-bolder mb-0">{{ $total_number_of_requests }}</h4>
                                             <p class="card-text font-small-3 mb-0">التحاليل</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-sm-6 col-12">
-                                    <div class="d-flex flex-row">
-                                        <div class="avatar bg-light-success me-2">
-                                            <div class="avatar-content">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign avatar-icon"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                                            </div>
-                                        </div>
-                                        <div class="my-auto">
-                                            <h4 class="fw-bolder mb-0">$9745</h4>
-                                            <p class="card-text font-small-3 mb-0">Revenue</p>
                                         </div>
                                     </div>
                                 </div>
