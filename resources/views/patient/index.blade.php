@@ -135,6 +135,7 @@
                       <a  id="createModalOpen"
                                       data-bs-toggle="modal" data-bs-target="#modalCenter"
                                       data-id="{{$patient->id}}"
+                                      data-result="{{$patient->last_results}}"
                                       data-identityType_number="{{$patient->identity}}"
                                       data-identity_type_id="{{$patient->identity_type_id}}"
                                       data-requesting_authority="{{$patient->requesting_authority}}"
@@ -233,8 +234,8 @@
                             <div class="col-lg-6 mt-4">
                                 @foreach ($tests as $test)
                                     <div class="form-check form-switch mb-4">
-                                        <input class="form-check-input" type="checkbox"name="tests[]" value="{{$test->id}}" id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">{{$test->name_en}} | {{$test->name_ar}}</label>
+                                        <input class="form-check-input" type="checkbox"name="tests[]" value="{{$test->id}}"  id="test-{{ $test->id }}">
+                                        <label class="form-check-label" for="test-{{ $test->id }}">{{$test->name_en}} | {{$test->name_ar}}</label>
                                     </div>
                                 @endforeach
                             </div>
@@ -288,18 +289,30 @@
 @endsection
 @section('script')
 <script>
+  var tests = @json($tests);
+  console.log(tests);
     var modal = document.getElementById('createModal');
 
     $(document).on("click", "#createModalOpen", function () {
         let id=$(this).data('id');
         let action= window.location.href.split('patient')[0];
         let url=action+'request/'+id+'/update'
-        console.log($(this).data().identity_type_id);
+        let results =$(this).data().result;
+        console.log(results);
         document.getElementById('requesting_authority').value=$(this).data().requesting_authority;
         document.getElementById('request_number').value=$(this).data().request_number;
         document.getElementById('formCreateRequest').action=url;
         document.getElementById('identity_type_id').value=$(this).data().identity_type_id;
         document.getElementById('identityType_number').value=$(this).data().identitytype_number;
+        results.forEach(result => {
+         
+          tests.forEach( test => {
+              if ( test.id == result.test_id && test.positive == result.value) {
+                console.log(result.id , test.id,result.value == test.positive);
+                document.getElementById("test-"+test.id).checked=true;
+              }
+          });
+        });
         // modal.style.display = 'block';
         document.getElementById('method').value='PUT';
 
@@ -318,6 +331,9 @@
         document.getElementById('requesting_authority').value="";
         document.getElementById('request_number').value="";
         document.getElementById('formCreateRequest').action=url;
+        tests.forEach( test => {
+            document.getElementById("test-"+test.id).checked=false;
+        });
         // document.getElementById('identity').value="";
 
 

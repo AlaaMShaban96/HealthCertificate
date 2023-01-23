@@ -12,7 +12,7 @@ class Patient extends Model
 {
     use Filterable;
     protected $table='patients';
-    protected $appends = ['identity','IdentityTypeId','RequestingAuthority','RequestNumber'];
+    protected $appends = ['identity','IdentityTypeId','RequestingAuthority','RequestNumber','LastResults'];
     protected $fillable = ['name','photo','gender','birth_date','age','nationality_id','branch_id','user_id'];
     use HasFactory;
     /**
@@ -52,6 +52,11 @@ class Patient extends Model
     {
         $request_number =$this->request()->latest()->first();
         return isset($request_number)?$request_number->request_number:'';
+    }
+    public function getLastResultsAttribute()
+    {
+        $last =$this->request()->latest()->first();
+        return isset($last)?$last->results:'';
     }
     /**
      * Get all of the request for the Patient
