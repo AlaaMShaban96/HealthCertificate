@@ -94,8 +94,8 @@
                                 <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
                                     @csrf
                                     <div class="mb-1">
-                                        <label for="login-email" class="form-label">البريد الالكتروني</label>
-                                        <input type="text" class="form-control" id="login-email" name="email" placeholder="john@example.com" aria-describedby="login-email" tabindex="1" autofocus />
+                                        <label for="login-email" class="form-label">كود </label>
+                                        <input type="text" class="form-control" id="login-email" name="code"  aria-describedby="login-email" tabindex="1" autofocus />
                                     </div>
 
                                     <div class="mb-1">

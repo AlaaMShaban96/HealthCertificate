@@ -11,7 +11,7 @@
     <tbody>
       @foreach ($users as $key => $user)
         <tr class="odd">
-          <td>{{$user->name}}</td>
+          <td>{{$user->name}} : كود الدخول  <span  class="font-weight-bold">{{ $user->code }}</span></td>
           <td> 
             @switch($user->role)
                 @case("employe")
@@ -45,7 +45,6 @@
                        data-role="{{$user->role}}" 
                        data-branch_id="{{$user->branch_id}}" 
                        data-phone="{{$user->phone}}"
-                       data-email="{{$user->email}}"
                        data-id="{{$user->id}}"
                         href="javascript:void(0);"><i data-feather='edit-3'></i> تعديل</a>
                       <a class="dropdown-item delete" data-id="{{$user->id}}" href="#"><i data-feather='delete'></i> حدف</a>
@@ -104,7 +103,7 @@
                       <div class="col-md-6 mb-1" data-select2-id="148">
                           <label class="form-label" for="select2-basic">الفرع</label>
                           <div class="position-relative" data-select2-id="147">
-                              <select class="select2 form-select select2-hidden-accessible" required name="branch_id" id="branch_id" data-select2-id="select2-basic" tabindex="-1" aria-hidden="true">
+                              <select class="select2 form-select select2-hidden-accessible"  name="branch_id" id="branch_id" data-select2-id="select2-basic" tabindex="-1" aria-hidden="true">
                               <option value="" data-select2-id="2">مدير نظام</option>
                                   @foreach ($branches as $key => $name)
                                       <option value="{{ $key }}" data-select2-id="2">{{ $name }}</option>
@@ -121,14 +120,8 @@
                       </div>
                       <div class="col-xl-6 col-md-6 col-12">
                           <div class="mb-1">
-                              <label class="form-label" for="basicInput">البريد الالكتروني</label>
-                              <input type="email" class="form-control" required name="email" id="email" placeholder="البريدالالكتروني">
-                          </div>
-                      </div>
-                      <div class="col-xl-12 col-md-6 col-12">
-                          <div class="mb-1">
                               <label class="form-label" for="basicInput">كلمة المرور</label>
-                              <input type="password" class="form-control" required name="password"  id="password" placeholder="كلمة السر ">
+                              <input type="password" class="form-control"  name="password"  id="password" placeholder="كلمة السر ">
                           </div>
                       </div>
                       <div class="col-12">
@@ -192,7 +185,6 @@
                 document.getElementById($(this).data().role).checked=true;
                 document.getElementById('branch_id').value=$(this).data().branch_id;
                 document.getElementById('phone').value=$(this).data().phone;
-                document.getElementById('email').value=$(this).data().email;
   
                 document.getElementById('formIdentityType').action=url+'/'+$(this).data('id');
                 document.getElementById('method').value='PUT';

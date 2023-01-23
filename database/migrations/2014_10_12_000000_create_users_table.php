@@ -16,9 +16,9 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name',50);
+            $table->integer('code')->nullable();
             $table->string('phone')->unique()->nullable();
             $table->enum('role', ['super-admin', 'admin','monitor','employe'])->default('employe');
-            $table->string('email')->unique()->nullable();
             $table->string('password');
             $table->bigInteger('branch_id')->unsigned()->nullable();
             $table->foreign('branch_id')->references('id')->on('branches');

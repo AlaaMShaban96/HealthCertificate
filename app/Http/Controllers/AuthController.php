@@ -20,11 +20,11 @@ class AuthController extends Controller
     {
        // validate the request...
          $request->validate([
-              'email' => 'required',
+              'code' => 'required|exists:users,code',
               'password' => 'required',
          ]);
          // check if the user exist in the database and redirect to the dashboard
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (Auth::attempt(['code' => $request->code, 'password' => $request->password])) {
                 Alert::toast('تم تسجيل الدخول بنجاح ✌️', 'success')->position('top-end')->autoClose(5000);
                 event( new CreateUsersLog(auth()->user(), 'login', ' تم تسجيل الدخول بنجاح ('.date('H:m:s Y-d-m ').') '));
                 return redirect()->to('/');

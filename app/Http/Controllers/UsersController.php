@@ -23,7 +23,9 @@ class UsersController extends Controller
     {
         $request['password']  = Hash::make($request->password);
         $user=User::create($request->all());
-        Alert::toast('تم التسجيل بنجاح', 'success')->position('top-end')->autoClose(5000);
+        $user->code= $user->id;
+        $user->save();
+        Alert::toast('تم التسجيل بنجاح رقم الموظف '.$user->code, 'success')->position('center-end')->autoClose(9000);
         event( new CreateUsersLog(auth()->user(), 'store', 'تم الاضافة  مستخدم ('.$user->name.')'));
         return redirect('users/');
 
