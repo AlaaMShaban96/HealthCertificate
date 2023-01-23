@@ -18,7 +18,7 @@ class RequestService
 
     public static function createRequest(Request $request,Patient $patient,$unique=false,$action='create')
     {
-
+        // dd($request->all());
         $tests_is_negative=Test::where('selected',1)->get()->except($request->tests);
         if ($action=='create'||$unique) {
             $patientRequest= PatientRequest::create([
@@ -30,6 +30,8 @@ class RequestService
             ]);
         }else {
             $patientRequest=$patient->request()->latest()->first();
+            $patientRequest->request_number=$request->request_number;
+            $patientRequest->save();
         }
         if ($unique) {
             $test= Test::where('unique',1)->first();
