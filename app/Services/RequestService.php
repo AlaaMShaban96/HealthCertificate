@@ -31,6 +31,7 @@ class RequestService
         }else {
             $patientRequest=$patient->request()->latest()->first();
             $patientRequest->request_number=$request->request_number;
+            $patientRequest->requesting_authority=$request->requesting_authority;
             $patientRequest->save();
         }
         if ($unique) {
