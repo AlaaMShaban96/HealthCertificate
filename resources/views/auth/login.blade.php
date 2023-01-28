@@ -6,11 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
-    <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
+    <title>تسجيل الدخول</title>
     <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
@@ -61,34 +58,59 @@
                         <!-- Login basic -->
                         <div class="card mb-0">
                             <div class="card-body">
-                                <a href="index.html" class="brand-logo">
-                                    <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28">
+                                <a href="{{ route('index') }}" class="brand-logo">
+                                    <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2025 1320" width="150" height="98">
+                                        <title>vecteezy_toucan-bird-mascot-vector-illustration_7923901-ai</title>
                                         <defs>
-                                            <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
-                                                <stop stop-color="#000000" offset="0%"></stop>
-                                                <stop stop-color="#FFFFFF" offset="100%"></stop>
-                                            </lineargradient>
-                                            <lineargradient id="linearGradient-2" x1="64.0437835%" y1="46.3276743%" x2="37.373316%" y2="100%">
-                                                <stop stop-color="#EEEEEE" stop-opacity="0" offset="0%"></stop>
-                                                <stop stop-color="#FFFFFF" offset="100%"></stop>
-                                            </lineargradient>
+                                            <linearGradient id="g1" x1="1220.1" y1="75.5" x2="1824.7" y2="100.8" gradientUnits="userSpaceOnUse">
+                                                <stop offset="0" stop-color="#f99010"/>
+                                                <stop offset="1" stop-color="#f9bb10"/>
+                                            </linearGradient>
+                                            <linearGradient id="g2" x1="1130.4" y1="93.6" x2="1772.4" y2="97.4" gradientUnits="userSpaceOnUse">
+                                                <stop offset="0" stop-color="#f1cf0f"/>
+                                                <stop offset="1" stop-color="#f9bb10"/>
+                                            </linearGradient>
+                                            <linearGradient id="g3" x1="1124.1" y1="486.5" x2="1776.1" y2="486.5" gradientUnits="userSpaceOnUse">
+                                                <stop offset="0" stop-color="#f8630b"/>
+                                                <stop offset="1" stop-color="#f98c0b"/>
+                                            </linearGradient>
+                                            <linearGradient id="g4" x1="1724.9" y1="318.2" x2="1927.7" y2="281.2" gradientUnits="userSpaceOnUse">
+                                                <stop offset="0" stop-color="#444e55"/>
+                                                <stop offset="1" stop-color="#6b747a"/>
+                                            </linearGradient>
                                         </defs>
-                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="Artboard" transform="translate(-400.000000, -178.000000)">
-                                                <g id="Group" transform="translate(400.000000, 178.000000)">
-                                                    <path class="text-primary" id="Path" d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z" style="fill: currentColor"></path>
-                                                    <path id="Path1" d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z" fill="url(#linearGradient-1)" opacity="0.2"></path>
-                                                    <polygon id="Path-2" fill="#000000" opacity="0.049999997" points="69.3922914 32.4202615 32.8435758 70.5039241 54.0490008 16.1851325"></polygon>
-                                                    <polygon id="Path-21" fill="#000000" opacity="0.099999994" points="69.3922914 32.4202615 32.8435758 70.5039241 58.3683556 20.7402338"></polygon>
-                                                    <polygon id="Path-3" fill="url(#linearGradient-2)" opacity="0.099999994" points="101.428699 0 83.0667527 94.1480575 130.378721 47.0740288"></polygon>
+                                        <style>
+                                            .s0 { fill: #313a43 } 
+                                            .s1 { fill: url(#g1) } 
+                                            .s2 { fill: url(#g2) } 
+                                            .s3 { fill: url(#g3) } 
+                                            .s4 { fill: #414b52 } 
+                                            .s5 { fill: url(#g4) } 
+                                        </style>
+                                        <g id="Layer 1">
+                                            <g id="Layer_1">
+                                                <g id=" 2639479736320">
+                                                    <g id="&lt;Group&gt;">
+                                                        <path id="&lt;Path&gt;" class="s0" d="m1008 97.2v92.2c-171.1 0-309.7 138.6-309.7 309.7 0 171 138.6 309.7 309.7 309.7h116.7c103.8 0 188.7 84.9 188.7 188.7v188.8h-377.5c-270.9-35.9-472.4-272.6-472.4-544.5 0-300.8 243.8-544.6 544.5-544.6z"/>
+                                                        <path id="&lt;Path&gt;" class="s1" d="m1034.1 97.2h209.4c421.9 0 739.5 214.5 739.5 662-151.7-74.5-186.2-78.3-347.7-78.3h-463.2c-76 0-138-62-138-138.1v-445.6z"/>
+                                                        <path id="&lt;Path&gt;" class="s2" d="m1034.1 97.2h209.4c421.9 0 739.5 214.5 739.5 662 0-307.9-263-533.1-573.3-533.1h-375.6v-128.9z"/>
+                                                        <path id="&lt;Path&gt;" class="s3" d="m1983 759.2c-151.7-74.5-186.2-78.3-347.7-78.3h-463.2c-76 0-138-62-138-138.1v-56.3h375.6c310.3 0 513.1 133.6 573.3 272.7z"/>
+                                                        <path id="&lt;Path&gt;" class="s4" d="m1620.6 680.9c-82.5-184.5 60.5-365.8 248.8-315.4 72.4 101.6 113.6 232.6 113.6 393.7-151.7-74.5-186.2-78.3-347.7-78.3z"/>
+                                                        <path id="&lt;Path&gt;" class="s5" d="m1754.8 363.2c34.8-8.6 73.6-8.6 114.6 2.3 72.4 101.6 113.6 232.6 113.6 393.7 0 0-39.8-249.7-228.2-396z"/>
+                                                        <path id="&lt;Path&gt;" class="s0" d="m1620.6 680.9c-27.4-61.4-29.9-122.4-14.1-174.7 199.3 42.1 330.1 146 376.5 253-151.7-74.5-186.2-78.3-347.7-78.3h-14.7z"/>
+                                                        <path id="&lt;Path&gt;" class="s0" d="m848.7 302.4c1.6 9.2 7.1 17.7 15.9 22.8 15.6 9.1 35.7 3.7 44.7-12 9.1-15.6 3.7-35.7-12-44.7q-1.3-0.8-2.6-1.4c18.4-4.8 38.7-2.6 56.5 7.6 35.9 20.7 48.1 66.6 27.4 102.5-20.7 35.8-66.5 48.1-102.4 27.4-35.8-20.7-48.1-66.4-27.5-102.2z"/>
+                                                        <path id="&lt;Path&gt;" class="s0" d="m529.5 1186.3c-290.1 2.8-525.5-243.2-507.3-535.5 30.5 56.6 76.6 105.7 136.4 140.2 16.3 9.4 33 17.4 50.1 24-48.7-77.4-76.8-169.1-76.8-267.3 0-197.7 114-368.8 279.7-451.3-33.7 54.7-53.2 119.2-53.2 188.2 0 131.2 70.4 246 175.6 308.6 16.2 226 192.9 409.4 416 436.2l58 156.9h-478.5z"/>
+                                                    </g>
+                                                    <g id="&lt;Group&gt;">
+                                                    </g>
                                                 </g>
                                             </g>
                                         </g>
                                     </svg>
-                                    <h2 class="brand-text text-primary ms-1">Vuexy</h2>
+                                    <br>
                                 </a>
 
-                                <h4 class="card-title mb-1">مرحبا في الشهادة الصحية! 👋</h4>
+                                <h4 class="card-title mb-1 text-center">مرحبا في الشهادة الصحية! 👋</h4>
                                 {{-- <p class="card-text mb-2">Please sign-in to your account and start the adventure</p> --}}
 
                                 <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
